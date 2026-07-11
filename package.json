@@ -1,0 +1,21 @@
+{
+  "name": "Bible-Quizzing-App",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+   "expo": "npm run start --workspace=apps/expo-app",
+    "android": "npm run android --workspace=apps/expo-app",
+    "ios": "npm run ios --workspace=apps/expo-app",
+    "web": "npm run web --workspace=apps/expo-app",
+    "server": "npm run dev --workspace=apps/server",
+    "server:web": "concurrently \"npm run web\" \"npm run server\""
+ 
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
