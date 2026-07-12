@@ -1,7 +1,8 @@
 {
-  "name": "expo-app",
+  "name": "@bq/expo-app",
   "version": "1.0.0",
   "main": "expo-router/entry",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "start": "EXPO_ROUTER_APP_ROOT=src/app expo start",
     "android": "EXPO_ROUTER_APP_ROOT=src/app expo run:android",

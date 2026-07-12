@@ -1,0 +1,21 @@
+{
+  "name": "@bq/server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@hono/standard-validator": "^0.2.3",
+    "hono": "^4.12.29",
+    "ioredis": "^5.11.1",
+    "valibot": "^1.4.2",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.1"
+  }
+}
