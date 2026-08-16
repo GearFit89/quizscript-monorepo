@@ -1,57 +1,49 @@
+import { UIQuiz } from '@/lib/content/UI-quizzies.content';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Pressable } from 'react-native';
+import { Text } from "@/components/ui/text"
+import Icon from './icon';
+import { Card } from '@/components/ui/card';
 
-export default function QuizGrid() {
+
+interface QuizCardProps {
+  /**
+   * The data that displays the quiz
+   */
+  data: UIQuiz;
+  /**
+   * The callback when the card is pressed
+   * @param data 
+   * @returns void
+   */
+  onPress: (data: UIQuiz) => void;
+}
+/**
+ * 
+ * @param props - The component props defined by {@link QuizCardProps}.
+ * @returns - A quiz card that users eelect
+ */
+export function QuizCard ({ data, onPress } : QuizCardProps ){
+
+
   return (
-    // Outer Container: Adds screen padding so content doesn't touch the edges
-    <View className="flex-1 bg-gray-50 px-4 py-6">
-      
-      {/* Grid Wrapper: Controls the row wrapping and the spacing between cards */}
-      <View className="flex-row flex-wrap justify-between gap-y-4">
-        
-        {/* Card 1 */}
-        <TouchableOpacity 
+       
+        <Pressable
           className="w-[47%] aspect-square bg-white rounded-2xl p-4 shadow-sm border border-gray-100 justify-between"
-          activeOpacity={0.7}
+        onPress={()=>onPress(data)}
+        accessibilityRole='button'
+        accessibilityLabel= { `Select Quiz: ${data.title}`}
         >
+          <Card>
           <View className="w-10 h-10 bg-purple-100 rounded-xl items-center justify-center">
-            <Text className="text-purple-600 text-lg">⚛️</Text>
+           <Icon key={data.icon} />
           </View>
-          <View>
-            <Text className="font-bold text-gray-800 text-base"></Text>
-            <Text className="text-xs text-gray-500 mt-1"></Text>
-          </View>
-        </TouchableOpacity>
 
-        {/* Card 2 */}
-        <TouchableOpacity 
-          className="w-[47%] aspect-square bg-white rounded-2xl p-4 shadow-sm border border-gray-100 justify-between"
-          activeOpacity={0.7}
-        >
-          <View className="w-10 h-10 bg-blue-100 rounded-xl items-center justify-center">
-            <Text className="text-blue-600 text-lg">📱</Text>
-          </View>
           <View>
-            <Text className="font-bold text-gray-800 text-base"></Text>
-            <Text className="text-xs text-gray-500 mt-1"></Text>
+            <Text className="font-bold text-gray-800 text-base">{data.title}</Text>
+            <Text className="text-xs text-gray-500 mt-1">{data.shortDescription}</Text>
           </View>
-        </TouchableOpacity>
-
-        {/* Card 3 */}
-        <TouchableOpacity 
-          className="w-[47%] aspect-square bg-white rounded-2xl p-4 shadow-sm border border-gray-100 justify-between"
-          activeOpacity={0.7}
-        >
-          <View className="w-10 h-10 bg-amber-100 rounded-xl items-center justify-center">
-            <Text className="text-amber-600 text-lg">⚡</Text>
-          </View>
-          <View>
-            <Text className="font-bold text-gray-800 text-base"></Text>
-            <Text className="text-xs text-gray-500 mt-1"></Text>
-          </View>
-        </TouchableOpacity>
-
-      </View>
-    </View>
-  );
+          </Card>
+        </Pressable>
+  )
 }
