@@ -169,8 +169,8 @@ function MenubarContent({
           as="Pressable"
           accessible={false}
           entering={FadeIn.reduceMotion(ReduceMotion.System)}
-          style={StyleSheet.absoluteFill}
-          pointerEvents="box-none">
+         style={[StyleSheet.absoluteFill, { pointerEvents: 'box-none' }]}
+          >
           <TextClassContext.Provider value="text-popover-foreground">
             <MenubarPrimitive.Content
               className={cn(

@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { queryClient, clientPersister } from '@/lib/persist-query';
-
+import "../global.css";
 
 
 

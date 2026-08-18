@@ -2,18 +2,18 @@ import { IconKey, Icons } from "@/lib/content/icons.content";
 
 
 interface IconProps {
-    key: IconKey;
+    name: IconKey;
     color?: string;
     size?: number;
     children?: React.ReactNode
 }
-export default function Icon ({key, color, size, children} : IconProps){
+export default function Icon ({name, color, size, children} : IconProps){
 
-    const IconComponent = Icons[key];
+    const IconComponent = Icons[name];
 
     if(! IconComponent) {
 
-        console.error("[icon] failed to get icon: ", key)
+        console.error("[icon] failed to get icon: ", name)
         return null;
     }
 

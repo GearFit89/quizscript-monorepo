@@ -19,7 +19,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.d.ts",
-    "tailwind.config.js",
+    "tailwind.config.ts",
     "nativewind-env.d.ts"
   ],
   "exclude": [

@@ -12,7 +12,7 @@ import { Pressable, View, StyleProp, ViewStyle } from "react-native";
 
 
 
-export type QuizModalVariant = keyof typeof variantMap;
+export type QuizModalVariant = 'solo-quiz'| 'solo-no_timer_mode'
 
 
 

@@ -43,7 +43,7 @@ export default function ModeOption({
         </Text>
       </View>
 
-      <Icon color={color} key={icon} />
+      <Icon color={color} name={icon} />
     </Pressable>
   );
 }

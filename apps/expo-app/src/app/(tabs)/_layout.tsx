@@ -46,6 +46,16 @@ export default function TabsLayout() {
           ),
         }}
       />
+      <Tabs.Screen 
+        name='practice'
+        options={{
+          title: "Practice Quizzing",
+          tabBarIcon: ({ color }) =>(
+             <SymbolView name="text.page.fill" tintColor={color} size={22} />
+          ),
+
+        }}
+        />
     </Tabs>
   );
 }

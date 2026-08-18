@@ -69,4 +69,4 @@ export const DifficultyOption: React.FC<DifficultyOptionProps> = ({
   );
 };
 
-
+export default DifficultyOption

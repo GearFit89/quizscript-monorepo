@@ -17,19 +17,21 @@ export interface QuestionFilters {
 
 }
 
-export interface QuizModalData <Mode_T>  {
+export interface QuizSetupData <Mode_T>  {
   mode?: QuizMode | Mode_T;
   difficultyLevel?: DifficultyLevel;
   questionFilter?: QuestionFilters;
 }
 
-export interface QuizModalState <Mode_T>  {
-  mode: QuizMode;
-  setMode: (mode: QuizMode) => void;
+export interface QuizSetupState <Mode_T>  {
+  type: QuizMode
+  id: string;
+  mode: Mode_T
+  setMode: (mode: Mode_T) => void;
   difficulty: DifficultyLevel;
   setDifficulty: (difficulty: DifficultyLevel) => void;
-  data: QuizModalData<Mode_T>;
-  updateData: (newData: Partial<QuizModalData<Mode_T>>) => void;
+  data: QuizSetupData<Mode_T>;
+  updateData: (newData: Partial<QuizSetupData<Mode_T>>) => void;
   startQuiz: () => void;
   questionFilters: QuestionFilters;
   
@@ -37,10 +39,10 @@ export interface QuizModalState <Mode_T>  {
 }
 
 
-const QuizModalContext = createContext<QuizModalState<any> | null>(null);
+const QuizSetupContext = createContext<QuizSetupState<any> | null>(null);
 
 
-export function useQuizModalState<Mode_T>(
+export function useQuizSetupState<Mode_T>(
     initialMode: Mode_T,
     quizActorRef: { send: (event: any) => void })
      {
@@ -74,10 +76,10 @@ export function useQuizModalState<Mode_T>(
   };
 }
 
-export function useQuizModal< Mode_T >(): QuizModalState<Mode_T> {
-  const context = useContext(QuizModalContext);
+export function useQuizSetup< Mode_T >(): QuizSetupState<Mode_T> {
+  const context = useContext(QuizSetupContext);
   if (!context) {
-    throw new Error('useQuizModal must be used within a <QuizModal>');
+    throw new Error('useQuizSetup must be used within a <QuizSetup>');
   }
-  return context as QuizModalState<Mode_T>;
+  return context as QuizSetupState<Mode_T>;
 }
