@@ -28,13 +28,13 @@ export function useLanguage({ keyName }: UseLanguageOptions): UseLanguageReturn{
 
     const languageContent = keyName ? content[keyName] : content
 
-
+    // TODO Add language logic
 
     
 
     return {
         content,
-        
+
         setLanguage,
         language
 

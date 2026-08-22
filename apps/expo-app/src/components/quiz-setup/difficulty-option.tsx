@@ -52,9 +52,14 @@ export const DifficultyOption: React.FC<DifficultyOptionProps> = ({
   style,
 }) => {
   const config = DIFFICULTY_CONFIG[value];
-  const uiz = useQuizSetup() // TODO: fix this to udagpte state
+  const {  setDifficulty } = useQuizSetup() // FIXME : fix this to udagpte state
   return (
-    <Pressable onPress={onPress} disabled={!onPress}>
+    <Pressable 
+    onPress={()=>{
+      setDifficulty(value)
+      onPress;  }
+    } 
+      disabled={!onPress}>
       <View
         style={style}
         className={`p-4 my-2 rounded-xl border ${config.containerClass}`}
