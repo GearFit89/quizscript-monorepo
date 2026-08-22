@@ -3,13 +3,14 @@ import { Pressable, View, StyleProp, ViewStyle } from "react-native";
 import { Text } from "@/components/ui/text";
 import { DifficultyLevel } from "@bq/shared/types";
 import { DialogTrigger } from "@/components/ui/dialog";
-import { QuizModal } from ".";
+import { QuizSetup } from ".";
 import { Button } from "@/components/ui/button";
 import { IconKey } from "@/lib/content/icons.content";
+import { useQuizSetup } from "@/hooks/quiz-modal.hook";
 
 export interface DifficultyOptionProps {
   value: DifficultyLevel;
-  description: string;
+  description?: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
 }
@@ -51,7 +52,7 @@ export const DifficultyOption: React.FC<DifficultyOptionProps> = ({
   style,
 }) => {
   const config = DIFFICULTY_CONFIG[value];
-
+  const uiz = useQuizSetup() // TODO: fix this to udagpte state
   return (
     <Pressable onPress={onPress} disabled={!onPress}>
       <View

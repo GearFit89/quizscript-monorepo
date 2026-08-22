@@ -1,26 +1,7 @@
-
-import * as Type from "./types.content";
-
-
-
-const practiceContent: Type.PracticeContent = {
-  flashCardButton: {
-    title: "Flash Cards",
-    description: "Test your knowledge with flash cards.",
-  },
-  contentButton: {
-    title: "Explore Questions",
-    description: "View and study quiz questions"
-  }
-
-}
+import contentJson from "./content.json"
+import { Content } from "./types"
 
 
+const content = contentJson as Content;
 
-
-const Content: Type.Content = {
-    "practicePage" : practiceContent
-
-}
-
-export default Content
+export default content;

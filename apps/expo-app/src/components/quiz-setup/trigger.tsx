@@ -9,8 +9,13 @@ import { useRouter } from "expo-router";
  *
  * @param props - Component props.
  * @param props.children - Optional custom trigger content. Defaults to "Open Quiz Settings".
- * @returns - A button that trggers a router push
- * @example
+ * @returns A button that trggers a router push
+ * @example 
+ * <QuizSetup > 
+ *   <Button >
+ *     <SetupTrigger />
+ *   </Button>
+ * <QuizSetup >
  
  */
 export const SetupTrigger = ({ children }: { children?: React.ReactNode }) => {
@@ -28,6 +33,10 @@ export const SetupTrigger = ({ children }: { children?: React.ReactNode }) => {
 
   return (
 
-    <Button onPress={handlePress} />
+    <Button onPress={handlePress} >
+
+      {children}
+
+      </Button>
   )
 }

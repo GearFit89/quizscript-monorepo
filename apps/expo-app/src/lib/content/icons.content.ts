@@ -15,6 +15,7 @@ import {
   Search, 
   HelpCircle,
   // Actions & UI
+  PlayCircle,
   ChevronRight, 
   ChevronLeft, 
   Check, 
@@ -37,6 +38,7 @@ export const Icons = {
   quiz: Trophy,
   profile: User,
   settings: Settings,
+  playCircle: PlayCircle,
 
   // Quizzing & Study
   bible: Book,
