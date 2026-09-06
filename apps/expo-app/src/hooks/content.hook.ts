@@ -16,7 +16,7 @@ import { useLanguage } from "./language.hook";
  * @returns The full content object or the selected content defined by `selector`.
 
  */
-function useContent<T = Content>(selector?: (data: Content) => T, keyName?: string): T {
+function useContent<T = Content>(selector?: (data: Content) => T, keyName?: keyof Content): T {
 
 
     const { content: languageContent } = useLanguage({ keyName })

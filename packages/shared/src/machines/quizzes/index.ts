@@ -1,3 +1,3 @@
 import { createMachine } from "xstate"
 
-const quizMachine = createMachine({})
+export const quizMachine = createMachine({})
