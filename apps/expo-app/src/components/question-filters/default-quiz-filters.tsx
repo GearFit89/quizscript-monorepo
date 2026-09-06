@@ -5,8 +5,8 @@ import { Text } from '@/components/ui/text';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { QuestionFilterSection } from '@/components/question-filters/QuestionFilterSection';
-import { useQuizModal } from '@/hooks/quiz-modal.hook';
-import type { QuestionFilters } from '@/hooks/quiz-modal.hook';
+import { useQuizSetup } from '@/hooks/quiz-setup.hook';
+import type { QuestionFilters } from '@/hooks/quiz-setup.hook';
 import { Accordion, AccordionContent } from '../ui/accordion';
 
 const CONTENT = {
@@ -94,18 +94,48 @@ const FILTER_CONTENT = {
 const BIBLE_BOOKS_HAVE = ['Matthew', 'Mark', 'Luke', 'John'];
 
 export default function DefaultQuizFilters() {
-  const { questionFilters, setQuestionFilters } = useQuizModal();
+  const { updateQuestionFilters: updateFilter , data } = useQuizSetup();
+  const { questionFilters } = data;
+  
+  return (
+    <View className="p-4">
+     
 
-  const updateFilter = <K extends keyof QuestionFilters>(key: K, value: QuestionFilters[K]) => {
-    setQuestionFilters((prev) => ({ ...prev, [key]: value }));
-  };
+      <QuestionFilterSection
+      type='multi'
+      name={CONTENT.questionType.title}
+        title={CONTENT.questionType.title}
+        options={CONTENT.questionType.options}
+        value={questionFilters?.questionType ?? [] }
+        onChange={(val) => updateFilter('questionType', val)}
+      />
+
+      <QuestionFilterSection
+       type='multi'
+       name={CONTENT.questionType.title}
+        title={CONTENT.flight.title}
+        options={CONTENT.flight.options}
+        value={questionFilters?.flights ?? []}
+        onChange={(val) => updateFilter('flights', val)}
+      />
+
+    </View>
+  );
+}
+
+
+
+function MaterialSelection () {
+  const { updateQuestionFilters: updateFilter , data } = useQuizSetup();
+  const { questionFilters } = data;
 
   
   const [materialSelected, setMaterialSelected] = React.useState<QuestionFilterMode>('MONTHS');
 
+
   return (
-    <View className="p-4">
-      <View className="flex-row gap-2 mb-4">
+     <View >
+        <View className="flex-row gap-2 mb-4">
         <Button
           onPress={() => setMaterialSelected('MONTHS')}
           variant={materialSelected === 'MONTHS' ? 'default' : 'outline'}
@@ -130,7 +160,7 @@ export default function DefaultQuizFilters() {
               name={CONTENT.questionType.title}
               title={CONTENT.months.title}
               options={CONTENT.months.options}
-              value={questionFilters?.months}
+              value={questionFilters?.months ?? []}
               onChange={(val) => updateFilter('months', val)}
             />
           </View>
@@ -147,7 +177,7 @@ export default function DefaultQuizFilters() {
                     name={CONTENT.questionType.title}
                     title={CONTENT.questionType.title}
                     options={CONTENT.chapters.options}
-                    value={questionFilters?.chapters}
+                    value={questionFilters?.chapters ?? []}
                     onChange={(val) => updateFilter('chapters', val)}
                   />
                 </AccordionContent>
@@ -156,25 +186,6 @@ export default function DefaultQuizFilters() {
           </View>
         )}
       </View>
-
-      <QuestionFilterSection
-      type='multi'
-      name={CONTENT.questionType.title}
-        title={CONTENT.questionType.title}
-        options={CONTENT.questionType.options}
-        value={questionFilters?.questionType}
-        onChange={(val) => updateFilter('questionType', val)}
-      />
-
-      <QuestionFilterSection
-       type='multi'
-       name={CONTENT.questionType.title}
-        title={CONTENT.flight.title}
-        options={CONTENT.flight.options}
-        value={questionFilters?.flights}
-        onChange={(val) => updateFilter('flights', val)}
-      />
-
-    </View>
-  );
+      </View>
+  )
 }

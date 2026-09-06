@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Button } from "@/components/ui/button";
-import { useQuizSetup } from "@/hooks/quiz-modal.hook";
+import { useQuizSetup } from "@/hooks/quiz-setup.hook";
 import { useRouter } from "expo-router";
 
 /**

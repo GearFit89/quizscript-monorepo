@@ -3,7 +3,7 @@ import { Pressable, View } from "react-native";
 import { IconKey } from "@/lib/content/icons.content";
 import Icon from "../icon";
 import { Text } from "../ui/text";
-import { useQuizSetup } from "@/hooks/quiz-modal.hook";
+import { useQuizSetup } from "@/hooks/quiz-setup.hook";
 import { QuizMode  } from "@bq/shared/types";
 
 export interface ModeOptionProps<Mode_T> {

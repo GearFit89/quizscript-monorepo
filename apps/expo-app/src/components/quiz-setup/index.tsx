@@ -9,51 +9,26 @@ import { SetupTrigger } from './trigger';
 import DifficultyOption from './difficulty-option';
 import ModeOption from './mode-option';
 import DefaultQuizFilters from '../question-filters/default-quiz-filters';
-
-
-interface QuizSetupProps {
-  children: React.ReactNode;
-  id: string;
-  type: QuizMode
-};
+import { QuizSetupProvider } from '@/providers/quiz-setup.provider';
 
 
 
-const QuizSetupContext = createContext({});
+
+
  
 
 
 
 
-//const  QuizSetupQuestionFilters = () =>    <DefaultQuizFilters  />;
-const QuizSetupStartButton = () => {
-
-}
 
   
-export default function QuizSetup({ children, type, id}: QuizSetupProps) {
-  
 
 
-  return (
-   <QuizSetupContext.Provider value={{id, type}} >
-    
-
-         <Text>Quiz Options</Text>
-        
-        {/* Setup content */}
-         {children}
-
-    
-     
-    </QuizSetupContext.Provider>
-  );
-}
 export { 
   SetupTrigger,
   DefaultQuizFilters as DefaultSetupFilters,
   ModeOption as SetupModeOption,
   DifficultyOption as SetupDifficultyOption,
-  QuizSetup
+  QuizSetupProvider
   
 }

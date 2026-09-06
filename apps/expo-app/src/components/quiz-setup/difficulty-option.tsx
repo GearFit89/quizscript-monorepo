@@ -6,7 +6,7 @@ import { DialogTrigger } from "@/components/ui/dialog";
 import { QuizSetup } from ".";
 import { Button } from "@/components/ui/button";
 import { IconKey } from "@/lib/content/icons.content";
-import { useQuizSetup } from "@/hooks/quiz-modal.hook";
+import { useQuizSetup } from "@/hooks/quiz-setup.hook";
 
 export interface DifficultyOptionProps {
   value: DifficultyLevel;
@@ -52,7 +52,7 @@ export const DifficultyOption: React.FC<DifficultyOptionProps> = ({
   style,
 }) => {
   const config = DIFFICULTY_CONFIG[value];
-  const {  setDifficulty } = useQuizSetup() // FIXME : fix this to udagpte state
+  const {  setDifficulty } = useQuizSetup() 
   return (
     <Pressable 
     onPress={()=>{
