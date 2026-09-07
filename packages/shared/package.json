@@ -1,6 +1,9 @@
 {
-  "name": "@bq/shared", 
+  "name": "@bq/shared",
   "version": "1.0.0",
   "main": "./src/index.ts",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "xstate": "^5.32.5"
+  }
 }
