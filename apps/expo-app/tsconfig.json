@@ -1,25 +1,20 @@
 {
-  "extends": "../../node_modules/expo/tsconfig.base",
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
-    "moduleResolution": "bundler",
     "paths": {
       "@/*": [
         "./src/*"
       ],
       "@bq/shared": [
         "../../packages/shared/src/index.ts"
-      ],
-      "@bq/shared/*": [
-        "../../packages/shared/src/*"
       ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/*.d.ts",
-    "tailwind.config.ts",
+    "tailwind.config.js",
+    "src/types.d.ts",
     "nativewind-env.d.ts"
   ],
   "exclude": [

@@ -1,4 +1,4 @@
-import { Icon } from '@/components/ui/lucide-icon';
+import { Icon } from '@/components/ui/icon';
 import { NativeOnlyAnimatedView } from '@/components/ui/native-only-animated-view';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
@@ -169,8 +169,8 @@ function MenubarContent({
           as="Pressable"
           accessible={false}
           entering={FadeIn.reduceMotion(ReduceMotion.System)}
-         style={[StyleSheet.absoluteFill, { pointerEvents: 'box-none' }]}
-          >
+          style={StyleSheet.absoluteFill}
+          pointerEvents="box-none">
           <TextClassContext.Provider value="text-popover-foreground">
             <MenubarPrimitive.Content
               className={cn(
