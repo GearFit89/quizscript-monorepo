@@ -4,7 +4,10 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "private": true,
   "license": "GPL-3.0-or-later",
@@ -13,9 +16,12 @@
     "hono": "^4.12.29",
     "ioredis": "^5.11.1",
     "valibot": "^1.4.2",
-    "ws": "^8.21.0"
+    "ws": "^8.21.0",
+    "xstate": "^5.32.5"
   },
   "devDependencies": {
-    "@types/ws": "^8.18.1"
+    "@types/ws": "^8.18.1",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.10"
   }
 }
