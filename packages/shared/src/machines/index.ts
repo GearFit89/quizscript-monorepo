@@ -41,10 +41,11 @@ export const rootMachine = setup({
     }),
   },
 }).createMachine({
+  /** @xstate-layout N4IgpgJg5mDOIC5QCcD2qAuCCWEwEMAmAOnwFcMALYgY0rBoGtsA7KAYglRbGNYDdUjXnQaMAwumZwAgjQypkAbQAMAXUSgADqljYM2bppAAPRAA5CAGhABPRIQCsANmfEVHlc4As314QBOQgBmAF9QmzRMHDwiUgpqUSZWDjBkNGRiLQAbfAwAM0UAW1p6JkkhbFl5RVUNJBAdPQMjBrMEb0ISRz8AlQBGFUJnc2DnYJt7BH6Xbs9vFQC-fsJzb3DI9CxcAhJyKniqMBYDGjzIdgAZAHkAcWuAVQAVOuMm-UMWY3bCfrdCbwBAJ-cwDYJLJyTBzmEbERweP5dRz9bwAdlR6wiICi21iewSxDILH29BO2DOGEgfAg2TAVzuAEkAHKvBrvFpfNqIQbWOwOIHmYhOAbDFzeRyOQgbbFbGK7Q7UIkk46nc4Qam09gAZQZtyZAH0HgAFVnaXQfVqgdrBYLedyeZxOJYedFQhAhAL-eEqGFLVESobSnFyuIkwnEhIq8lqjV0rUAUUu8fET31twe8a1qYAstcACLx02Nc0c76IG12zxeJ0LFSuvnumYqYgrZH9VFA1zmIOynahgl6KAsFIPLScbi8ARCXiDlijuQKZTqN4lz5lhBBN3BFTeQX+jwS-p9VEDRw96J9-EHWcjsdpDJZXIFYrEWfzmpL+pm5prrkb3lTACfjEPup6OKiYxAmEWLBpeCrENkqBQFAKQMiw448HwLCCMICFIawC61MubKrpapiID0wRCratreOC5iojM5hbkMqLEME-orP0DHBI4wJnjBvZ4vBiHIah6H3ooj55IUyAlKJBEfkW7K-la3IrG6R7OP0cIIiinQ+nW564vKYZQGQcAYFc8YyAAavGaYZlmymkZyanTF0bqEIZIHwn8Nr9DaArGSGJA0NwPDyJ8xDcNkrB0pJmQ5DJL6xfFxAAEb4EwUBoESEAuT+ZHtAsVEjP6dHAuY1VAluYxsUCASotVKyrAxmKbBewnhSwkUcjFLBxTw7BMvGTwAOrXAASgA0vq1wAGILZczKFsR34Wm55EdCoZUMZRVU1QEW7eDMxCAp6QSDKCwQzCFcE9X10VpcN1wGuIb2jSmDJvfqC0yAySZ5oVm3rqVxDlQd3FHSdziOMQjWOnWtrcf093dRFDD9ag+T5ENdKjRN01zW9K2jSDpZ-uK8POIsu7eSs7XOFuyJuBdPQBGMu3QZ1JlxI9WPPbj+PsB9TJfU8P0GlN8a3ADo3A+txZFVtJU+uxKzouBdYohiqJ1e250CnxgLOBB3aCV1plRfw+i2LG2qJsmqZatcNwU6p22WJpCwkBdATmCCIro9bBi2xg9u4JqCZJim+rZs8K1GpcMgAJrxlNHvFRYAHcsi9oIn0gSuOMzgh6GNt28QACOZDYAAXvXKSvqgiGkDbBPTdmMiXPqACKDwMgAWlnqv8lRjUwgxnOeqXbrVVRwooh4CwGWjlt83slcRzXdeN83sCt6g7dh3SRpTTI33iA5A-D6P66BBPArlTPrhjG6Ad7t6ZvXeYjXl1vMOVda4NybmwFubdsqn21E8B4eZU73z-I-BGz9p7gjfszBsgwlhCguuKVEhAILOE5gAk+2Bw72xAfvcBh9IEd3YMtGQWoAAS4gZBTTzFqRB7lkGTxfugueWCjwBBAhdX4AJHDmD4qiUhUDyHAL3mAqAEDj4sGKPgbIfc94YUnNhacKjiBqLkhorRDduFexcHCZqvFWpw18P0eeaxfIDF2sCRYKweYyithXIBO8qFKIMVoZAciaB0i4JhKcuFaHHyCSEsA5j2hSLcOBUYyIuh2NOh-PoQpvTbiajPX4sjt6UMUQfI+r4MBkAgLYHRWEcIznKbASp1SEkWEsSkmx6SeiZKwYseGGIgSSJ3M1AhRTfElNAWUtueN8CwEoGcZAEBYC1MiQ06ZuQ5kLKWa0hASSrGpNsd0hxWCGa4KgrxDBXRwhYjUXgeADRYJ4hXCrdcABaBYbpXkAgLlWX5gYN6hQVM80GSDvA+wxCgoEgxtyOmIR1Lxm94JJGYGwYFlN3IEM0j4KinhuIQUlMEQh8LHmmQJMqMkFJIBos9u0AhNN3EB1WM1U8W4ZgiP9s6bc6IjIArgmGJUkYKVqmpdnaYiwvLcTmCKVEsK0S7lkQSAVRwhWUnVFHMAIqx7THAl5QhzYqw+D8I6IIniSX9mvNgIct5NVg1psQP+1ZA4+G0p6LyCw3A2loj4by4wAgKoOKJFCbA0I2qQeic6jgYXeVGH4X4LEhj2v9N5Aht0lgCV5oCsyFkmmhvcrMOEt1ghSN3NxFwErxTuFOh2OGkjP5l15RjXqgsyIqVFQCLcXQRGNSCKKYhUoG3ygFlFbgA18a5u2pihsNougtlcPCYYt0IKmqEoOzGw6WAxWFvFcd7QS4gUuv6OGlg+ITCnadeGiMrqGUJWM+REcd0WDdOMXSngAjIl3AFGRA6fF3sjjSDVJEXl-kGBCs2vxdq6xcGWhsUF3CMUBCoSRvxPTEpXT+ihu9JmosAyCvNmDAK2mcRBjshDkS2lvRh-xUzUAPrFWChs6ISD7hA3WJYfwv0Zr5cUzD1DlHRLIfwADG10XbRmLnXZb72J6RhKsUUFGFFYb4+UoxRQTF71o2ieGeLJHgVcF4Vw887VLwWIHIIEp5N+NKTQ8psSoqhI05Yc6HE51rE5tOj+cMiNm2quiW09bOPCTkZRqzSm25NKqVMYTNLEAIdwV0NYvxiFHkjZpHWZygSAlmCiZd3jAG-p4wE-jMzNn4EWfcqLorNMQ0WLTWtO5hn0amP0dsbgBk9qGL0U6FmJm8eIEUMg2QDDJVsGkWjgxGvlhncKLwEpCW1o4wizN3GqPgP64N7Aw20i0DXQYbDFWtVsvS7K48gJ9YNj8IKabMrbRSIYgts1eXguKb6wNobuQRuZEQhlDKkXla4dE64FshL0TNaPCeQK4mdM5I8Nub0fRiHdYK83Nbb38AfeIAAd3wB8Pbf2RPtD+G4CHU8BhNS6LtN0CwRGgSBIQgEqxdqI5W8olHG33tbeGykMbgOIcg+a01ME4nsVEZcKxOsCPv2PYU711nm3MjIAYDtrnOH8d53EyeEg03A6zYBGbJnIWXvrbl8QBXsBXvlbx9F6YPPgeMX5+DwlbpJSte9JGzocqMTXNCEAA */
   context: {
     username:""
   },
-  id: "root:idea2",
+  id: "root",
   type: "parallel",
   states: {
     auth: {
@@ -76,13 +77,13 @@ export const rootMachine = setup({
             idle: {
               on: {
                 LOGIN: {
-                  target: "#root:idea2.auth.loggingIn",
+                  target: "#root.auth.loggingIn",
                 },
                 SIGN_UP: {
-                  target: "#root:idea2.auth.signingUp",
+                  target: "#root.auth.signingUp",
                 },
                 SELECT_GUEST_MODE: {
-                  target: "#root:idea2.auth.guest",
+                  target: "#root.auth.guest",
                 },
               },
             },
@@ -162,10 +163,10 @@ export const rootMachine = setup({
         idle: {
           on: {
             SELECT_SOLO: {
-              target: "#root:idea2.activity.quizzing.solo",
+              target: "#root.activity.quizzing.solo",
             },
             SELECT_MUTLIPLAYER: {
-              target: "#root:idea2.activity.quizzing.multiplayer",
+              target: "#root.activity.quizzing.multiplayer",
             },
           },
         },
@@ -196,7 +197,7 @@ export const rootMachine = setup({
                     id: "solo.normalQuiz",
                     input: {},
                     onDone: {
-                      target: "#root:idea2.activity.idle",
+                      target: "#root.activity.idle",
                     },
                     src: "OfflineQuiz",
                   },
@@ -206,7 +207,7 @@ export const rootMachine = setup({
                     id: "solo.practice",
                     input: {},
                     onDone: {
-                      target: "#root:idea2.activity.idle",
+                      target: "#root.activity.idle",
                     },
                     src: "OfflineQuiz",
                   },
@@ -216,7 +217,7 @@ export const rootMachine = setup({
                     id: "solo.study",
                     input: {},
                     onDone: {
-                      target: "#root:idea2.activity.idle",
+                      target: "#root.activity.idle",
                     },
                     src: "OfflineQuiz",
                   },
@@ -226,7 +227,7 @@ export const rootMachine = setup({
                     id: "solo.flashcards",
                     input: {},
                     onDone: {
-                      target: "#root:idea2.activity.idle",
+                      target: "#root.activity.idle",
                     },
                     src: "OfflineQuiz",
                   },
