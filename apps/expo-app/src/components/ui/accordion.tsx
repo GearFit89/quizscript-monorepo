@@ -1,4 +1,4 @@
-import { Icon } from '@/components/ui/lucide-icon';
+import { Icon } from '@/components/ui/icon';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import * as AccordionPrimitive from '@rn-primitives/accordion';
