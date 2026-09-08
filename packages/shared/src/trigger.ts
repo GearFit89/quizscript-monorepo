@@ -16,10 +16,11 @@ type QuestionKey = keyof Omit<Question, "id">;
  * object
  * @param questionKey The key of which we are alphabetically sorting
  * @throws Throws "no data" if data is found.
- * @returns Two array
+ * @returns A fn (getPosOf) and the indexed questions
  */
-function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "question"): string[] {
+function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "question"){
     // TODO: Add some striping logic to remove numbers and symbols or something, --maybe??
+    
     const sortedQuestions = [...questions].sort((a, b)=>{
         // Make sure this is a string
         const questA = String(a[questionKey] ?? '');
@@ -28,10 +29,10 @@ function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "
         // Ingores case when comparing
         return questA.localeCompare( questB, undefined, { sensitivity: "base"})
     })
-    const postions: string [] = [];
+    const postions: number[] = [];
 
-    sortedQuestions.forEach((q)=>{
-        postions[q.id] = q[questionKey]
+    sortedQuestions.forEach((q, i)=>{
+        postions[q.id] = i;
     })
 
     if(postions.length === 0){
@@ -39,5 +40,46 @@ function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "
 
     }
 
-    return postions;
+    return {
+        getPosOf: (id: number)=> postions[id],
+        indexed: sortedQuestions
+    }
 }
+
+function cleanChars(string: string){
+    return string.replace(/[^\w\s]/g, "").trim()
+}
+
+
+
+export const cleanSortData = <T extends Record<string|number, any>> (data: T [], key: keyof T = "question"): T[] =>
+     data.map(item=> ({
+    [key]:cleanChars(item[key]),
+    ...item
+    })).sort((a, b)=>{
+
+        // Make sure this is a string
+        const questA = String(a[key] ?? '');
+        const questB = String(b[key] ?? '');
+
+        // Ingores case when comparing
+        return questA.localeCompare( questB, undefined, { sensitivity: "base"})
+});
+
+    function exactWordIndex(words: string[], charIndex: number, isSpace: boolean = false): number{
+        let count = 0;
+
+        if(isSpace) charIndex--; // Go back to the word a not the edge space
+
+        for ( let i = 0; i > words.length; i++){
+            count += words[i].length
+
+            if(count > charIndex){
+                return i;
+            }
+
+            count ++; // Accounts for spaces
+        }
+        return -1
+
+    }
