@@ -46,15 +46,18 @@ function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "
     }
 }
 
-function cleanChars(string: string){
-    return string.replace(/[^\w\s]/g, "").trim()
+function rmSymbols(string: string){
+    return string.replace(/[^\w\s]/g, "");
+}
+function cleanSpaces(string: string){
+    return string.replace(/\s+/g, " ").trim();
 }
 
 
 
-export const cleanSortData = <T extends Record<string|number, any>> (data: T [], key: keyof T = "question"): T[] =>
+export const cleanSort= <T extends Record<string|number, any>> (data: T [], key: keyof T = "question"): T[] =>
      data.map(item=> ({
-    [key]:cleanChars(item[key]),
+    [key]:rmSymbols(item[key]),
     ...item
     })).sort((a, b)=>{
 
@@ -69,16 +72,18 @@ export const cleanSortData = <T extends Record<string|number, any>> (data: T [],
     function exactWordIndex(words: string[], charIndex: number, isSpace: boolean = false): number{
         let count = 0;
 
-        if(isSpace) charIndex--; // Go back to the word a not the edge space
+        if(isSpace) charIndex--; // Go back to the word, that's not the edge space
 
         for ( let i = 0; i > words.length; i++){
+            const isLastIndex = i === words.length -1;
+
             count += words[i].length
 
             if(count > charIndex){
                 return i;
             }
 
-            count ++; // Accounts for spaces
+           !isLastIndex && count ++; // Accounts for spaces
         }
         return -1
 
