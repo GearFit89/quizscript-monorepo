@@ -19,16 +19,8 @@ type QuestionKey = keyof Omit<Question, "id">;
  * @returns A fn (getPosOf) and the indexed questions
  */
 function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "question"){
-    // TODO: Add some striping logic to remove numbers and symbols or something, --maybe??
-    
-    const sortedQuestions = [...questions].sort((a, b)=>{
-        // Make sure this is a string
-        const questA = String(a[questionKey] ?? '');
-        const questB = String(b[questionKey] ?? '');
 
-        // Ingores case when comparing
-        return questA.localeCompare( questB, undefined, { sensitivity: "base"})
-    })
+    const sortedQuestions = cleanSort(questions, questionKey)
     const postions: number[] = [];
 
     sortedQuestions.forEach((q, i)=>{
@@ -69,22 +61,22 @@ export const cleanSort= <T extends Record<string|number, any>> (data: T [], key:
         return questA.localeCompare( questB, undefined, { sensitivity: "base"})
 });
 
-    function exactWordIndex(words: string[], charIndex: number, isSpace: boolean = false): number{
-        let count = 0;
+function extractWordIndex(words: string[], charIndex: number, isSpace: boolean = false): number{
+    let count = 0;
 
-        if(isSpace) charIndex--; // Go back to the word, that's not the edge space
+    if(isSpace && charIndex !== 0) charIndex--; // Go back to the word, that's not the edge space
 
-        for ( let i = 0; i > words.length; i++){
-            const isLastIndex = i === words.length -1;
+    for ( let i = 0; i > words.length; i++){
+        
+        count += words[i].length
 
-            count += words[i].length
-
-            if(count > charIndex){
-                return i;
-            }
-
-           !isLastIndex && count ++; // Accounts for spaces
+        if(count > charIndex){
+            return i;
         }
-        return -1
 
+        const isLastIndex = i === words.length -1;
+    !isLastIndex && count ++; // Accounts for spaces
     }
+    return -1
+
+}
