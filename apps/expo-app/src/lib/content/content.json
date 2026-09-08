@@ -1,0 +1,29 @@
+{
+  
+  "practicePage": {
+    "flashCardButton": {
+      "title": "Flashcards",
+      "description": "Practice with flashcards"
+    },
+    "contentButton": {
+      "title": "Content",
+      "description": "Read the content"
+    }
+  },
+  "setup": {
+    "standard": {
+      "modes": {
+        "normal": {
+          "title": "Normal Mode",
+          "description": "Standard setup",
+          "icon": "bookmark"
+        },
+        "timed": {
+          "title": "Timed Mode",
+          "description": "Beat the clock",
+          "icon": "timer"
+        }
+      }
+    }
+  }
+}
