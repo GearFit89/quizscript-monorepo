@@ -14,16 +14,6 @@ const defualtQuizFilters: QuestionFilters = {
       };
 
 
-export interface QuestionFilters {
-    category?: string;
-    tags?: string[];
-    limit?: number;
-    months: string[]; // TODO: Add some months quizType
-    chapters: string[];
-    questionType: string[];
-    questionDifficulty: string[];
-    flights: string[];
-}
 
 export interface QuizSetupData<Mode_T> {
     id: string;
@@ -49,6 +39,9 @@ export interface QuizSetupStateArgs <Mode_T>{
   id: string
 }
  
+
+
+
 
 export function useQuizSetupState<Mode_T>({
   onQuizStart,

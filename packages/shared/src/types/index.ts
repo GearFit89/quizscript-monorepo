@@ -18,3 +18,4 @@ export type QuizMode = "SOLO"|"VS"
 
 export type DifficultyLevel = "easy" | "medium" | "hard" | "super_hard";
 
+export * from "./setup"
