@@ -5,6 +5,8 @@ import DefaultQuizFilters from "../question-filters/default-quiz-filters";
 import { useSetupContent } from "@/hooks/";
 import { useActorRef } from "@xstate/react";
 import { rootMachine } from "@bq/shared/machines";
+import { Button } from "@/components/ui/button"
+import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
 
 
 export default function StandardSetup (){
@@ -15,8 +17,9 @@ export default function StandardSetup (){
     const { standard: content } = useSetupContent();
 
     const handleQuizStart = () => {
+
         actorRef.send({ type: "NORMAL_QUIZ" });
-        router.push(`/setup/${id}`)
+        router.push(`/quiz/${id}`)
 
 
     }
@@ -26,9 +29,10 @@ export default function StandardSetup (){
             id={id} 
             quizType={type}
             initialMode={"normal"}
-            onQuizStart={handleQuizStart}
+
 
          >
+            
 
            <SetupModeOption 
              value="normal" 
@@ -46,6 +50,8 @@ export default function StandardSetup (){
            <SetupDifficultyOption value="hard"/>
 
            <DefaultQuizFilters />
+           
+            <Button onPress={handleQuizStart} />
         </QuizSetupProvider>
     )
 }

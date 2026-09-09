@@ -26,10 +26,12 @@ export const SetupTrigger = ({ children }: { children?: React.ReactNode }) => {
 
   function handlePress () {
 
-    router.push({
-      pathname: 'setup',
-      params: {quizId, quizType}
-    })
+
+    console.log("press")
+    // router.push({
+    //   pathname: 'setup',
+    //   params: {quizId, quizType}
+    // })
 
   }
 

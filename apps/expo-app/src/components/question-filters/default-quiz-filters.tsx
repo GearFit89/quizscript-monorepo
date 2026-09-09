@@ -13,7 +13,7 @@ export default function DefaultQuizFilters() {
   
   return (
     <View className="p-4">
-     
+     <MaterialSelection />
 
       <QuestionFilterSection
       type='multi'
@@ -32,7 +32,7 @@ export default function DefaultQuizFilters() {
         value={questionFilters?.flights ?? []}
         onChange={(val) => updateFilter('flights', val)}
       />
-
+ 
     </View>
   );
 }

@@ -17,23 +17,20 @@ export function QuizSetupProvider<Mode_T>({
     children,
     quizType,
     id, 
-    onQuizStart,
     initialMode
    }: QuizSetupProviderProps<Mode_T>
 ){
   const quizSetupState =  useQuizSetupState({
-        onQuizStart,
         quizType,
         initialMode,
         id,
 
     })
-
-    useEffect(()=>{
-
-         onQuizStart();
-
-    }, [])
+   useEffect(()=>{
+console.log(quizSetupState)
+   }, [ quizSetupState ]
+)
+   
    
 
     return (

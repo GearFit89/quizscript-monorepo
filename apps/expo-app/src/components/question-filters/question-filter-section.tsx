@@ -1,8 +1,8 @@
-import * as React from 'react';
+
 import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { QuestionFilterOption, FilterOptionType } from './question-filter-option.js';
+import { QuestionFilterOption, FilterOptionType } from './question-filter-option';
 
 export interface FilterOptionDef {
   label: string;
@@ -63,6 +63,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
       <View className={className ?? 'mb-6'}>
         {title ? <Text className="mb-2 text-lg font-semibold">{title}</Text> : null}
         <RadioGroup value={props.value} onValueChange={props.onChange} className="gap-1">
+          <View className="flex-row flex-wrap gap-2">
           {options.map((opt) => (
             <QuestionFilterOption
               key={`${name}-${opt.value}`}
@@ -77,6 +78,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
               disabled={opt.disabled}
             />
           ))}
+          </View>
         </RadioGroup>
       </View>
     );
