@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useId, useRef, useState } from 'react';
 import { QuizMode } from '@bq/shared/types';
 import { useActor , useActorRef} from "@xstate/react"
-import { DifficultyLevel } from '@bq/shared/types';
+import type { DifficultyLevel, QuestionFilters} from '@bq/shared/types';
+
+
 
 export const QuizSetupContext = createContext<QuizSetupState<any> | null>(null);
 
