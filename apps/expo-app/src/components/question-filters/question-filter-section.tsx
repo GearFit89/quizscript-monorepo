@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { QuestionFilterOption, FilterOptionType } from './QuestionFilterOption';
+import { QuestionFilterOption, FilterOptionType } from './question-filter-option.js';
 
 export interface FilterOptionDef {
   label: string;

@@ -19,7 +19,9 @@ import { useRouter } from "expo-router";
  
  */
 export const SetupTrigger = ({ children }: { children?: React.ReactNode }) => {
-  const  {id: quizId,  type: quizType } = useQuizSetup();
+  const  { data } = useQuizSetup();
+  const { id: quizId, quizType } = data;
+
   const router = useRouter()
 
   function handlePress () {
