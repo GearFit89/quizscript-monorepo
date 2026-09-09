@@ -38,20 +38,20 @@ export interface QuizSetupState<Mode_T> {
     setMode: (mode: Mode_T) => void;
     setDifficulty: (difficulty: DifficultyLevel) => void;
     updateData: (newData: Partial<QuizSetupData<Mode_T>>) => void;
-    startQuiz: () => void;
+    onQuizStart: () => void;
    // setQuestionFilters: React.Dispatch<React.SetStateAction<QuestionFilters>>;
     updateQuestionFilters: <K extends keyof QuestionFilters>(key: K, value: QuestionFilters[K]) => void;
 }
 export interface QuizSetupStateArgs <Mode_T>{
   initialMode: Mode_T;
   quizType: QuizMode;
-  quizActorRef: { send: (event: any) => void },
+  onQuizStart: ()=> void,
   id: string
 }
  
 
 export function useQuizSetupState<Mode_T>({
-  quizActorRef,
+  onQuizStart,
   quizType,
   initialMode,
   id
@@ -107,15 +107,8 @@ export function useQuizSetupState<Mode_T>({
     setData((prev) => ({ ...prev, ...newData }));
   };
 
-  const { send } = quizActorRef;
+  
 
-  const startQuiz = () => {
-    console.log('Starting quiz with:', data);
-    send({
-      type: "START",
-      ...data,
-    });
-  };
 
   return {
     data,
@@ -124,7 +117,7 @@ export function useQuizSetupState<Mode_T>({
     updateData,
    // setQuestionFilters,
     updateQuestionFilters,
-    startQuiz,
+    onQuizStart
   };
 }
 export function useQuizSetup< Mode_T >(): QuizSetupState<Mode_T> {

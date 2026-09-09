@@ -5,26 +5,33 @@ import { UI_QUIZZES, UIQuiz } from "@/lib/content/UI-quizzies.content";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { QuizMode } from "@bq/shared/types";
-import Content from "@/lib/content";
-import { P } from "@/components/ui/p";
 import { Icon as LucideIcon } from "@/components/ui/lucide-icon";
 import { User, Users } from "lucide-react-native";
-import { QuizSetup, SetupTrigger } from "@/components/quiz-setup";
+import { SetupTrigger } from "@/components/quiz-setup";
+import { usePracticeContent } from "@/hooks";
+
+
 
 function FlashCardButton() {
+
+  const { flashCardButton } = usePracticeContent()
+
   return (
     <Button variant="default" className="w-full flex-col items-start p-6 h-auto gap-2 border-border bg-card rounded-2xl">
-      <Text className="font-bold text-base text-card-foreground">{Content.practicePage.flashCardButton.title}</Text>
-      <Text variant={"p"} className="text-sm text-muted-foreground">{Content.practicePage.flashCardButton.description} </Text>
+      <Text className="font-bold text-base text-card-foreground">{flashCardButton.title}</Text>
+      <Text variant={"p"} className="text-sm text-muted-foreground">{flashCardButton.description} </Text>
     </Button>
   );
 } 
 
 function ContentButton (){
+  
+  const { contentButton } = usePracticeContent()
+
   return (
     <Button className="w-full flex-col items-start p-6 h-auto gap-2 border-border bg-card rounded-2xl">
-      <Text className="font-bold text-base text-card-foreground">{Content.practicePage.contentButton.title} </Text>
-      <Text variant={'p'} className="text-sm text-muted-foreground">{Content.practicePage.contentButton.description} </Text>
+      <Text className="font-bold text-base text-card-foreground">{contentButton.title} </Text>
+      <Text variant={'p'} className="text-sm text-muted-foreground">{contentButton.description} </Text>
     </Button>
   )
 }
@@ -63,6 +70,9 @@ function QuizGrid() {
       </View>
 
       {/* Quiz List as 2-column grid */}
+
+      </View>
+      )
       
 }
 

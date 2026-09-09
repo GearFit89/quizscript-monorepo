@@ -1,5 +1,5 @@
 import { QuizMode } from "@bq/shared/types";
-import { IconKey } from "./icons.content";
+import { IconKey } from "../icons";
 type Strict<T> = T & { [k: string]: never };
 
 interface Button  {

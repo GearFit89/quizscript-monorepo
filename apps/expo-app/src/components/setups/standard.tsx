@@ -1,25 +1,32 @@
 import  { QuizSetupProvider, SetupDifficultyOption, SetupModeOption } from "@/components/quiz-setup";
 import { QuizMode } from "@bq/shared/types";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import DefaultQuizFilters from "../question-filters/default-quiz-filters";
-import { useSetupContent } from "@/hooks/content.hook";
+import { useSetupContent } from "@/hooks/";
 import { useActorRef } from "@xstate/react";
-
+import { rootMachine } from "@bq/shared/machines";
 
 
 export default function StandardSetup (){
 
-    const actorRef = useActorRef()
+    const actorRef = useActorRef(rootMachine)
+    const router = useRouter();
     const { id, type } = useLocalSearchParams<{id:string, type: QuizMode}>()
-    const { standard: content } = useSetupContent()
+    const { standard: content } = useSetupContent();
+
+    const handleQuizStart = () => {
+        actorRef.send({ type: "NORMAL_QUIZ" });
+        router.push(`/setup/${id}`)
+
+
+    }
     
     return (
         <QuizSetupProvider 
             id={id} 
             quizType={type}
             initialMode={"normal"}
-            quizActorRef={actorRef}
-
+            onQuizStart={handleQuizStart}
 
          >
 
@@ -31,7 +38,6 @@ export default function StandardSetup (){
            <SetupModeOption
             value="timed" 
             {...content.modes.timed}
-
             />
 
 

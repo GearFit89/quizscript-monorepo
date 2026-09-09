@@ -32,5 +32,8 @@ function useContent<T = Content>(selector?: (data: Content) => T, keyName?: keyo
 function useSetupContent() {
   return useContent((c) => c.setup);
 }
+function usePracticeContent (){
+  return useContent((c)=> c.practicePage)
+}
 
-export { useContent, useSetupContent };
+export { useContent, useSetupContent, usePracticeContent };

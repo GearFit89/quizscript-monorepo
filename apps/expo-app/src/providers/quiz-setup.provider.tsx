@@ -1,5 +1,5 @@
 import { QuizSetupContext, QuizSetupStateArgs, useQuizSetup, useQuizSetupState } from "@/hooks/quiz-setup.hook";
-import React, { createContext, useContext, useId, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useId, useRef, useState } from 'react';
 import { QuizMode } from '@bq/shared/types';
 import { useActor , useActorRef} from "@xstate/react"
 import { DifficultyLevel } from '@bq/shared/types';
@@ -17,18 +17,24 @@ export function QuizSetupProvider<Mode_T>({
     children,
     quizType,
     id, 
-    quizActorRef,
+    onQuizStart,
     initialMode
    }: QuizSetupProviderProps<Mode_T>
 ){
   const quizSetupState =  useQuizSetupState({
-        quizActorRef,
+        onQuizStart,
         quizType,
         initialMode,
         id,
 
     })
-    
+
+    useEffect(()=>{
+
+         onQuizStart();
+
+    }, [])
+   
 
     return (
         <QuizSetupContext.Provider value={quizSetupState} >
