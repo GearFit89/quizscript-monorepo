@@ -7,4 +7,4 @@ export const BIBLE_BOOKS: Record<string, { chps: number }> = {
 };
 
 
-export const getChapters = (bookName: keyof typeof BIBLE_BOOKS) => Array.from({ length: BIBLE_BOOKS})
+export const getChapters = (bookName: keyof typeof BIBLE_BOOKS): number[] => Array.from({ length: BIBLE_BOOKS[bookName].chps ?? 0}).map((_, i)=> i +1)
