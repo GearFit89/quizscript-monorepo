@@ -11,32 +11,30 @@ import {
 } from "../ui/accordion";
 import { useState } from "react";
 import { useSetupContent } from "@/hooks";
+import { getChapters, BIBLE_BOOKS } from "@bq/shared/utils";
+import { BibleKey } from "@bq/shared/types";
 
 type QuestionFilterMode = "MONTHS" | "BIBLE";
 
-const FILTER_filterSection = {
+const FILTERS = {
   MONTHS: "Months",
   BIBLE: "Bible Reference",
 } as const;
 
-const BIBLE_BOOKS_HAVE = ["Matthew", "Mark", "Luke", "John"];
-
-
-
-function getChapters(bibleBook: string){
-  
-
-}
 export default function MaterialSelection() {
   const { filterSection } = useSetupContent();
-  const { updateQuestionFilters: updateFilter, data } = useQuizSetup();
+  const {
+    updateQuestionFilters: updateFilter,
+    data,
+    updateBibleRef,
+  } = useQuizSetup();
   const { questionFilters } = data;
 
-  const [openBook, setOpenBook] = useState<string>("")
+  const [openBook, setOpenBook] = useState<string>("");
   const [materialSelected, setMaterialSelected] =
     useState<QuestionFilterMode>("MONTHS");
 
-    console.log(filterSection.questionType, filterSection.chapters)
+  console.log(filterSection.questionType, filterSection.chapters);
 
   return (
     <View>
@@ -46,14 +44,14 @@ export default function MaterialSelection() {
           variant={materialSelected === "MONTHS" ? "default" : "outline"}
           className="flex-1 rounded-md"
         >
-          <Text>{FILTER_filterSection.MONTHS}</Text>
+          <Text>{FILTERS.MONTHS}</Text>
         </Button>
         <Button
           onPress={() => setMaterialSelected("BIBLE")}
           variant={materialSelected === "BIBLE" ? "default" : "outline"}
           className="flex-1 rounded-md"
         >
-          <Text>{FILTER_filterSection.BIBLE}</Text>
+          <Text>{FILTERS.BIBLE}</Text>
         </Button>
       </View>
 
@@ -70,18 +68,18 @@ export default function MaterialSelection() {
             />
           </View>
         ) : (
-          <Accordion 
-              
-              type="single"
-              value={openBook}
-              onValueChange={setOpenBook as ()=> void} // Sliences the ts compiler, because it can't recongize react state as returning void
-              collapsible
-           >
-            {BIBLE_BOOKS_HAVE.map((bibleBook) => (
-              <AccordionItem key={bibleBook} value={`material-${bibleBook}`}>
-
+          <Accordion
+            type="single"
+            value={openBook}
+            onValueChange={(value: string | undefined) =>
+              setOpenBook(value ?? "")
+            }
+            collapsible
+          >
+            {Object.keys(BIBLE_BOOKS).map((bookName) => (
+              <AccordionItem key={bookName} value={`material-${bookName}`}>
                 <AccordionTrigger>
-                  <Text>{bibleBook}</Text>
+                  <Text>{bookName}</Text>
                 </AccordionTrigger>
 
                 <AccordionContent>
@@ -89,14 +87,20 @@ export default function MaterialSelection() {
                     type="multi"
                     name={filterSection.questionType.title}
                     title={filterSection.questionType.title}
-                    options={filterSection.chapters.options}
-                    value={questionFilters?.chapters ?? []}
-                    onChange={(val) => updateFilter("chapters", val)}
+                    options={getChapters(bookName as BibleKey).map((c) => ({
+                      label: String(c),
+                      value: String(c),
+                    }))}
+                    value={
+                      questionFilters?.chapters[bookName as BibleKey] ?? []
+                    }
+                    onChange={(val) =>
+                      updateBibleRef(bookName as BibleKey, val)
+                    }
+                    isWrapLayout
                   />
-                 
                 </AccordionContent>
               </AccordionItem>
-
             ))}
           </Accordion>
         )}

@@ -15,6 +15,7 @@ interface BaseProps {
   name: string;
   options: FilterOptionDef[];
   type: FilterOptionType;
+  isWrapLayout?: boolean
   className?: string;
 }
 
@@ -63,7 +64,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
       <View className={className ?? 'mb-6'}>
         {title ? <Text className="mb-2 text-lg font-semibold">{title}</Text> : null}
         <RadioGroup value={props.value} onValueChange={props.onChange} className="gap-1">
-          <View className="flex-row flex-wrap gap-2">
+          <View className={props.isWrapLayout ? "flex-row flex-wrap gap-2": "gap 1"}>
           {options.map((opt) => (
             <QuestionFilterOption
               key={`${name}-${opt.value}`}
@@ -95,7 +96,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
   return (
     <View className={className ?? 'mb-6'}>
       {title ? <Text className="mb-2 text-lg font-semibold">{title}</Text> : null}
-      <View className="gap-1">
+      <View className={props.isWrapLayout ? "flex-row flex-wrap gap-2": "gap 1"}>
         {options.map((opt) => (
           <QuestionFilterOption
             key={`${name}-${opt.value}`}

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import { Checkbox } from '@/components/ui/checkbox';
-import { RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
+import * as React from "react";
+import { View } from "react-native";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
-export type FilterOptionType = 'single' | 'multi';
+export type FilterOptionType = "single" | "multi";
 
 export interface QuestionFilterOptionProps {
   /**
@@ -61,14 +61,22 @@ export function QuestionFilterOption({
 }: QuestionFilterOptionProps) {
   const labelId = `label-for-${name}-${value}`;
 
-  if (type === 'multi') {
+  if (type === "multi") {
     const handlePress = () => {
       if (!disabled) onChange(name, value, !checked);
     };
     return (
       <View className="flex-row items-center gap-3 py-2">
-        <Checkbox checked={checked} onCheckedChange={handlePress} disabled={disabled} />
-        <Label nativeID={labelId} onPress={handlePress} className="flex-1 native:text-base">
+        <Checkbox
+          checked={checked}
+          onCheckedChange={handlePress}
+          disabled={disabled}
+        />
+        <Label
+          nativeID={labelId}
+          onPress={handlePress}
+          className="native:text-base flex-1"
+        >
           {label}
         </Label>
       </View>
@@ -78,10 +86,14 @@ export function QuestionFilterOption({
   // type === 'single' — relies on an ancestor RadioGroup for state/exclusivity
   return (
     <View className="flex-row items-center gap-3 py-2">
-      <RadioGroupItem aria-labelledby={labelId} value={value} disabled={disabled} />
+      <RadioGroupItem
+        aria-labelledby={labelId}
+        value={value}
+        disabled={disabled}
+      />
       <Label
         nativeID={labelId}
-        className="flex-1 native:text-base"
+        className="native:text-base flex-1"
         onPress={() => {
           if (disabled) return;
           onChange(name, value, true);

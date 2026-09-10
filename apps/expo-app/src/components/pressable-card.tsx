@@ -3,6 +3,7 @@ import { View, Pressable } from 'react-native';
 import { Text } from "@/components/ui/text"
 import Icon from './icon';
 import { UIQuiz } from '@/lib/content/UI-quizzies.content';
+import { cn } from '@/lib/utils'; // swap for your actual classnames util if named differently
 
 interface QuizCardProps {
   /**
@@ -12,10 +13,16 @@ interface QuizCardProps {
 
   /**
    * The callback when the card is pressed
-   * @param data 
+   * @param data
    * @returns void
    */
   onPress?: (data: UIQuiz) => void;
+
+  /**
+   * Optional className override for the outer Pressable — lets a parent
+   * grid control width/flex without fighting a hardcoded size.
+   */
+  className?: string;
 
   /**
    * Optional accessibility role and custom label
@@ -28,28 +35,42 @@ interface QuizCardProps {
  * @param props - The component props defined by {@link QuizCardProps}.
  * @returns - A quiz card that users select
  */
-export default function PressableCard({ data, onPress, aRole = 'button', aLabel }: QuizCardProps) {
+export default function PressableCard({
+  data,
+  onPress,
+  className,
+  aRole = 'button',
+  aLabel,
+}: QuizCardProps) {
   return (
     <Pressable
-    
-      className="w-[165px] aspect-square bg-card rounded-2xl p-5 shadow-sm border border-border items-center"
+      className={cn(
+        "flex-1 aspect-square bg-card rounded-2xl p-5 shadow-sm border border-border items-center justify-center active:opacity-80",
+        className,
+      )}
       onPress={() => onPress && onPress(data)}
-      accessibilityRole={"button"}
+      accessibilityRole={aRole}
       accessibilityLabel={aLabel ?? `Select Quiz: ${data.title}`}
     >
-      {/* Icon Section */}
-      <View className="items-center justify-center mt-1">
-        <View className="w-14 h-14 bg-purple-100 rounded-xl items-center justify-center">
-          <Icon name={data.icon} size={28} color="#7c3aed" />
+      {/* Icon Section — big and proud */}
+      <View className="items-center justify-center">
+        <View className="w-20 h-20 bg-purple-100 rounded-2xl items-center justify-center">
+          <Icon name={data.icon} size={40} color="#7c3aed" />
         </View>
       </View>
 
       {/* Text Content */}
-      <View className="items-center w-full px-1 mb-1">
-        <Text className="font-bold text-card-foreground text-base text-center" numberOfLines={1}>
+      <View className="items-center w-full px-1 mt-3 gap-1">
+        <Text
+          className="font-bold text-card-foreground text-base text-center"
+          numberOfLines={1}
+        >
           {data.title}
         </Text>
-        <Text className="text-xs text-muted-foreground mt-1 text-center" numberOfLines={2}>
+        <Text
+          className="text-xs text-muted-foreground text-center"
+          numberOfLines={2}
+        >
           {data.shortDescription}
         </Text>
       </View>
