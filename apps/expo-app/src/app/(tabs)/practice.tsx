@@ -18,28 +18,30 @@ import {
 } from "lucide-react-native";
 import { usePracticeContent } from "@/hooks";
 import Icon from "@/components/icon";
-
 function FlashCardButton() {
   const { flashCardButton } = usePracticeContent();
 
   return (
     <Button
       variant="default"
-      className="h-auto flex-1 flex-row items-center justify-between gap-3 rounded-2xl border-border bg-card p-4"
+      className="h-auto flex-1 flex-col items-start gap-2 rounded-2xl border-border bg-card p-4"
     >
-      <View className="flex-1 flex-row items-center gap-2">
+      <View className="w-full flex-row items-center gap-2">
         <LucideIcon as={Layers} size={16} className="text-card-foreground" />
-        <Text className="text-card-foreground text-base font-bold">
+        <Text
+          className="text-card-foreground text-base font-bold shrink"
+          numberOfLines={1}
+        >
           {flashCardButton.title}
         </Text>
       </View>
-      <Text
+      {/* <Text
         variant="p"
-        numberOfLines={1}
-        className="text-muted-foreground shrink text-sm"
+        numberOfLines={2}
+        className="text-muted-foreground w-full text-sm"
       >
         {flashCardButton.description}
-      </Text>
+      </Text> */}
     </Button>
   );
 }
@@ -50,7 +52,7 @@ function ContentButton() {
   return (
     <Button
       variant="default"
-      className="h-auto flex-1 flex-row items-center justify-between gap-3 rounded-2xl border-border bg-card p-4"
+      className="h-auto flex-1 flex-row items-start gap-2 rounded-2xl border-border bg-card p-4"
     >
       <View className="flex-1 flex-row items-center gap-2">
         <LucideIcon as={BookOpen} size={16} className="text-card-foreground" />
@@ -58,13 +60,7 @@ function ContentButton() {
           {contentButton.title}
         </Text>
       </View>
-      <Text
-        variant="p"
-        numberOfLines={1}
-        className="text-muted-foreground shrink text-sm"
-      >
-        {contentButton.description}
-      </Text>
+     
     </Button>
   );
 }

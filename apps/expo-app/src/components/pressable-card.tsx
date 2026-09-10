@@ -45,7 +45,7 @@ export default function PressableCard({
   return (
     <Pressable
       className={cn(
-        "flex-1 aspect-square bg-card rounded-2xl p-5 shadow-sm border border-border items-center justify-center active:opacity-80",
+        "w-[50%] aspect-square bg-card rounded-2xl p-5 shadow-sm border border-border items-center justify-center active:opacity-80",
         className,
       )}
       onPress={() => onPress && onPress(data)}
