@@ -1,39 +1,31 @@
-import content from "@/lib/content";
-import { Content } from "@/lib/content/types";
+import React, { createContext, useContext, useMemo } from "react";
+import type { Content } from "@/lib/content/types";
 import { useLanguage } from "./language.hook";
-
-
-/**
-
- * Custom hook to select and retrieve dynamic app content.
-
- *
-
- * @template T - The inferred return type taken from the selector function.
-
- * @param selector - Optional transformation function to use a certain part of the content.
-
- * @returns The full content object or the selected content defined by `selector`.
-
- */
-function useContent<T = Content>(selector?: (data: Content) => T, keyName?: keyof Content): T {
-
-
-    const { content: languageContent } = useLanguage({ keyName })
-  // Infers the T type to the returned content
-  return selector ? selector(languageContent) : (languageContent as T);
+import { ContentContext } from "@/context";
+// 1. Define the Context shape
+export interface ContentContextValue {
+  content: Content;
 }
 
-/**
- * Custom hook that uses the setup content, to avoid long chaining.
- * 
- * @returns The setup content from the app content.
- */
-function useSetupContent() {
+
+
+export function useContent<T = Content>(
+  selector?: (data: Content) => T
+): T {
+  const context = useContext(ContentContext);
+
+  if (!context) {
+    throw new Error("useContent must be used within a <ContentProvider>");
+  }
+
+  return selector ? selector(context.content) : (context.content as T);
+}
+
+// 4. Convenience Hooks
+export function useSetupContent() {
   return useContent((c) => c.setup);
 }
-function usePracticeContent (){
-  return useContent((c)=> c.practicePage)
-}
 
-export { useContent, useSetupContent, usePracticeContent };
+export function usePracticeContent() {
+  return useContent((c) => c.practicePage);
+}
