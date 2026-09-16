@@ -84,6 +84,7 @@ export default function MaterialSelection() {
 
                 <AccordionContent>
                   <QuestionFilterSection
+                    variant="circle"
                     type="multi"
                     name={filterSection.questionType.title}
                     title={filterSection.questionType.title}

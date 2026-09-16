@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
-import { storage } from './storage';
+import { asyncGet, storage } from './storage';
 
 
 export const clientPersister = createAsyncStoragePersister({
@@ -11,12 +11,17 @@ export const clientPersister = createAsyncStoragePersister({
       return Promise.resolve();
     },
     getItem: (key) => {
-      const value = storage.getString(key);
+      if(storage.type === 'async'){
+        
+        return asyncGet(key)
+      }
+      const value = storage.get(key);
+      
       return Promise.resolve(value ?? null);
     },
    
     removeItem: (key) => {
-      storage.remove(key);
+      storage.del(key);
       return Promise.resolve();
     },
   },

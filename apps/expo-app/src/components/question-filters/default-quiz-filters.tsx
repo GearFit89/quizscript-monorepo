@@ -16,6 +16,7 @@ export default function DefaultQuizFilters() {
      <MaterialSelection />
 
       <QuestionFilterSection
+      variant='block'
       type='multi'
       name={filterSection.questionType.title}
         title={filterSection.questionType.title}

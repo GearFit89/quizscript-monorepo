@@ -2,29 +2,31 @@ import { Stack } from 'expo-router';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { queryClient, clientPersister } from '@/lib/persist-query';
 import "../global.css";
-
+import { ElementInspector } from 'react-native-element-inspector';
 
 
 
 
 export default function RootLayout() {
   return (
-    <PersistQueryClientProvider
-      client={queryClient}
-      persistOptions={{ persister: clientPersister }}
-     
-    >
+    
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={{ persister: clientPersister }}
+      
+      >
 
-      <Stack>
-
-
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="setup" options={{ headerShown: false }} />
+        <Stack>
 
 
-        {/* <Stack.Screen name="index" options={{ title: 'Home' }} />
-        <Stack.Screen name="profile" options={{ title: 'User Profile' }} /> */}
-      </Stack>
-    </PersistQueryClientProvider>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="setup" options={{ headerShown: false }} />
+
+
+          {/* <Stack.Screen name="index" options={{ title: 'Home' }} />
+          <Stack.Screen name="profile" options={{ title: 'User Profile' }} /> */}
+        </Stack>
+      </PersistQueryClientProvider>
+    
   );
 }

@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { QuestionFilterOption, FilterOptionType } from './question-filter-option';
+import { QuestionFilterOption, FilterOptionType, FilterOptionVariant } from './question-filter-option';
 
 export interface FilterOptionDef {
   label: string;
@@ -17,6 +17,7 @@ interface BaseProps {
   type: FilterOptionType;
   isWrapLayout?: boolean
   className?: string;
+  variant?: FilterOptionVariant;
 }
 
 interface SingleProps extends BaseProps {
@@ -73,6 +74,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
               value={opt.value}
               label={opt.label}
               checked={props.value === opt.value}
+              variant={props.variant}
               
               // Use the onChange from the parent QuestionFilterSection
               onChange={(_n, v) => props.onChange(v)}
@@ -101,6 +103,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
           <QuestionFilterOption
             key={`${name}-${opt.value}`}
             type="multi"
+            variant={props.variant}
             name={name}
             value={opt.value}
             label={opt.label}
