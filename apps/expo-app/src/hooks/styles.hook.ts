@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import type { AnyStyle, StyleClass, StyleContent } from "../lib/styles/types";
-
-interface StylesState {
+import { StyleContext } from "@/context";
+export interface StylesState {
   stylesContent: StyleContent;
   /** Replace the whole tree. */
   setStylesContent: (next: StyleContent) => void;
@@ -97,4 +97,18 @@ export function useStylesState(initial: StyleContent): StylesState {
     addElement,
     addTarget,
   };
+}
+
+
+
+export const useStyles = () => {
+
+  try {
+    const context = useContext(StyleContext);
+    return context;
+    
+  } catch (error) {
+    console.error("UseStyles must in a <Styles> </Styles> Provider.")
+    
+  }
 }

@@ -10,9 +10,8 @@ import type {
   QuestionFilters,
   BibleKey,
 } from "@bq/shared/types";
+import { QuizSetupContext } from "@/context";
 import { BIBLE_BOOKS } from "@bq/shared/utils";
-
-export const QuizSetupContext = createContext<QuizSetupState<any> | null>(null);
 
 const defualtQuizFilters: QuestionFilters = {
   months: [],
