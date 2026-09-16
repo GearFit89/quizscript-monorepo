@@ -1,6 +1,9 @@
-// import { createMMKV, MMKV } from 'react-native-mmkv';
+import { createMMKV, MMKV } from 'react-native-mmkv';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
+
+
+
 
 //  Storage Driver Interface
 export interface IStorageDriver {
@@ -43,32 +46,32 @@ abstract class BaseStorageDriver implements IStorageDriver {
 }
 
 //  Implementation: MMKV Storage (Synchronous, Native Native)
-// export class MMKVStorageDriver extends BaseStorageDriver {
-//   private instance: MMKV;
-//   public type: 'MMKV';
+export class MMKVStorageDriver extends BaseStorageDriver {
+  private instance: MMKV;
+  public type: 'MMKV';
 
-//   constructor(instance?: MMKV) {
-//     super();
-//     this.type = 'MMKV' 
-//     this.instance = instance ?? createMMKV()
-//   }
+  constructor(instance?: MMKV) {
+    super();
+    this.type = 'MMKV' 
+    this.instance = instance ?? createMMKV()
+  }
 
-//   get(key: string): string | undefined {
-//     return this.instance.getString(key);
-//   }
+  get(key: string): string | undefined {
+    return this.instance.getString(key);
+  }
 
-//   set(key: string, value: string): void {
-//     this.instance.set(key, value);
-//   }
+  set(key: string, value: string): void {
+    this.instance.set(key, value);
+  }
 
-//   del(key: string): void {
-//     this.instance.remove(key);
-//   }
+  del(key: string): void {
+    this.instance.remove(key);
+  }
 
-//   clear(): void {
-//     this.instance.clearAll();
-//   }
-// }
+  clear(): void {
+    this.instance.clearAll();
+  }
+}
 
 //  Implementation: Web LocalStorage (Synchronous, Web)
 export class WebLocalStorageDriver extends BaseStorageDriver {

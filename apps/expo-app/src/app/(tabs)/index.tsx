@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { QUIZ_REGISTRY } from "@/lib/quiz-registry";
 import { ScrollView, View } from "react-native";
-import { useStyles } from "@/hooks/styles.hook";
+
 import { useEffect } from "react";
 import { ElementInspector } from "react-native-element-inspector";
 

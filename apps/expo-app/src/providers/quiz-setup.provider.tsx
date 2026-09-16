@@ -26,10 +26,8 @@ export function QuizSetupProvider<Mode_T>({
         id,
 
     })
-   useEffect(()=>{
-console.log(quizSetupState)
-   }, [ quizSetupState ]
-)
+   
+
    
    
 
