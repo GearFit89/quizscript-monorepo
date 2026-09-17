@@ -49,13 +49,14 @@ function cleanSpaces(string: string){
 
 export const cleanSort= <T extends Record<string|number, any>> (data: T [], key: keyof T = "question"): T[] =>
      data.map(item=> ({
-    [key]:rmSymbols(item[key]),
-    ...item
+    id: item.id,
+    cleanKey:rmSymbols(item[key])
+
     })).sort((a, b)=>{
 
         // Make sure this is a string
-        const questA = String(a[key] ?? '');
-        const questB = String(b[key] ?? '');
+        const questA = String(a.cleanKey ?? '');
+        const questB = String(b.cleanKey ?? '');
 
         // Ingores case when comparing
         return questA.localeCompare( questB, undefined, { sensitivity: "base"})
