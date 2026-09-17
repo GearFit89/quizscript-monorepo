@@ -3,6 +3,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { defaultTBQNParams, fetchTBQNcontent, getTBQNQuestions } from '../src/scraper'
 import { materialMap } from '@/scraper/scraper'
+import { getTBQNCacheKey } from '@/redis/key-setter';
 
 
 console.log("NODE_ENV", process.env.NODE_ENV);
@@ -41,5 +42,7 @@ describe('fetchTBQNData', () => {
     // console.log("data\n", JSON.stringify(data, null, 2))
 
     console.log("length", Object.keys(data ?? {}).length)
+    console.log(getTBQNCacheKey(9, "all"))
+    console.log(getTBQNCacheKey(4, 3))
   })
 })
