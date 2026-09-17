@@ -21,7 +21,7 @@ type QuestionKey = keyof Omit<Question, "id">;
 function buildQuestionIndex (questions: Question[], questionKey: QuestionKey = "question"){
 
     const sortedQuestions = cleanSort(questions, questionKey)
-    const postions: number[] = [];
+    const postions: Record<number, number> = {};
 
     sortedQuestions.forEach((q, i)=>{
         postions[q.id] = i;
@@ -66,7 +66,7 @@ function extractWordIndex(words: string[], charIndex: number, isSpace: boolean =
 
     if(isSpace && charIndex !== 0) charIndex--; // Go back to the word, that's not the edge space
 
-    for ( let i = 0; i > words.length; i++){
+    for ( let i = 0; i < words.length; i++){
         
         count += words[i].length
 
