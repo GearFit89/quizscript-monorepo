@@ -1,4 +1,4 @@
-import { IconKey, Icons } from "@/lib/content/icons.content";
+import { IconKey, Icons } from "@/lib/icons";
 
 
 interface IconProps {

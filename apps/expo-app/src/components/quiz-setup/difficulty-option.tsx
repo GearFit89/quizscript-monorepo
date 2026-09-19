@@ -3,9 +3,8 @@ import { Pressable, View, StyleProp, ViewStyle } from "react-native";
 import { Text } from "@/components/ui/text";
 import { DifficultyLevel } from "@bq/shared/types";
 import { DialogTrigger } from "@/components/ui/dialog";
-import { QuizSetup } from ".";
 import { Button } from "@/components/ui/button";
-import { IconKey } from "@/lib/content/icons.content";
+import { IconKey } from "@/lib/icons";
 import { useQuizSetup } from "@/hooks/quiz-setup.hook";
 
 export interface DifficultyOptionProps {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, View } from "react-native";
-import { IconKey } from "@/lib/content/icons.content";
+import { IconKey } from "@/lib/icons";
 import Icon from "../icon";
 import { Text } from "../ui/text";
 import { useQuizSetup } from "@/hooks/quiz-setup.hook";
@@ -9,6 +9,7 @@ import { QuizMode  } from "@bq/shared/types";
 export interface ModeOptionProps<Mode_T> {
   value: Mode_T;
   title: string;
+  
   icon: IconKey;
   description?: string;
   color?: string;

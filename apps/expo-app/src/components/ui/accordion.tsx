@@ -47,7 +47,6 @@ function AccordionItem({
       asChild={Platform.OS !== 'web'}
       {...props}>
       <Animated.View
-        className="native:overflow-hidden"
         layout={Platform.select({ native: LinearTransition.duration(200) })}>
         {children}
       </Animated.View>
@@ -125,9 +124,12 @@ function AccordionContent({
         className={cn(
           'overflow-hidden',
           Platform.select({
-            web: isExpanded ? 'animate-accordion-down' : 'animate-accordion-up',
+            web: cn(
+              'overflow-hidden',
+              isExpanded ? 'animate-accordion-down' : 'animate-accordion-up'
+            ),
           })
-        )}
+  )}
         {...props}>
         <Animated.View
           exiting={Platform.select({

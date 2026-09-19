@@ -1,8 +1,8 @@
-import * as React from 'react';
+
 import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { QuestionFilterOption, FilterOptionType } from './QuestionFilterOption';
+import { QuestionFilterOption, FilterOptionType, FilterOptionVariant } from './question-filter-option';
 
 export interface FilterOptionDef {
   label: string;
@@ -15,7 +15,9 @@ interface BaseProps {
   name: string;
   options: FilterOptionDef[];
   type: FilterOptionType;
+  isWrapLayout?: boolean
   className?: string;
+  variant?: FilterOptionVariant;
 }
 
 interface SingleProps extends BaseProps {
@@ -63,6 +65,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
       <View className={className ?? 'mb-6'}>
         {title ? <Text className="mb-2 text-lg font-semibold">{title}</Text> : null}
         <RadioGroup value={props.value} onValueChange={props.onChange} className="gap-1">
+          <View className={props.isWrapLayout ? "flex-row flex-wrap gap-2": "gap 1"}>
           {options.map((opt) => (
             <QuestionFilterOption
               key={`${name}-${opt.value}`}
@@ -71,12 +74,14 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
               value={opt.value}
               label={opt.label}
               checked={props.value === opt.value}
+              variant={props.variant}
               
               // Use the onChange from the parent QuestionFilterSection
               onChange={(_n, v) => props.onChange(v)}
               disabled={opt.disabled}
             />
           ))}
+          </View>
         </RadioGroup>
       </View>
     );
@@ -93,11 +98,12 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
   return (
     <View className={className ?? 'mb-6'}>
       {title ? <Text className="mb-2 text-lg font-semibold">{title}</Text> : null}
-      <View className="gap-1">
+      <View className={props.isWrapLayout ? "flex-row flex-wrap gap-2": "gap 1"}>
         {options.map((opt) => (
           <QuestionFilterOption
             key={`${name}-${opt.value}`}
             type="multi"
+            variant={props.variant}
             name={name}
             value={opt.value}
             label={opt.label}
