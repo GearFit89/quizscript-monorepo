@@ -2,12 +2,15 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import type { AnyStyle, StyleClass, StyleContent } from "../lib/styles/types";
 import { StyleContext } from "@/context";
 import stylesContent from "@/lib/styles/styles.json";
+import { NavigationRouteContext } from "expo-router/build/react-navigation";
+import { NativeEventsManager } from "react-native-reanimated";
 
 type StyleJson = typeof stylesContent;
 export interface StylesState {
   stylesContent: StyleContent;
   /** Replace the whole tree. */
   setStylesContent: (next: StyleContent) => void;
+  exportJSON: () => string;
   /** Functional update of the whole tree. */
   updateStylesContent: (updater: (prev: StyleContent) => StyleContent) => void;
   /** Set (or overwrite) a single style property on target.element. */
@@ -89,6 +92,15 @@ export function useStylesState(initial: StyleContent): StylesState {
     }));
   }, []);
 
+
+const exportJSON = useCallback(() => {
+  const json = JSON.stringify(stylesContent);
+  console.debug("json:", json);
+
+  return json;
+
+  
+}, [stylesContent]);
   const addTarget = useCallback((target: string) => {
     setStylesContent((prev) => ({
       ...prev,
@@ -99,6 +111,7 @@ export function useStylesState(initial: StyleContent): StylesState {
   return useMemo(
     () => ({
       stylesContent,
+      exportJSON,
       setStylesContent,
       updateStylesContent,
       setStyleProperty,
