@@ -1,11 +1,14 @@
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { queryClient, clientPersister } from '@/lib/persist-query';
 import "../global.css";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StylesProvider } from '@/providers';
 import { ContentProvider } from '@/providers/content.provider';
+import { FloatingStyleEditorButton } from '@/components/styles/floating-button';
 
 export default function RootLayout() {
   return (
@@ -17,10 +20,13 @@ export default function RootLayout() {
         >
           <StylesProvider>
             <ContentProvider>
+             
               <Stack>
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="setup" options={{ headerShown: false }} />
               </Stack>
+               <FloatingStyleEditorButton />
+              
             </ContentProvider>
           </StylesProvider>
         </PersistQueryClientProvider>

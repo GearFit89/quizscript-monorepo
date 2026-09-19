@@ -1,6 +1,9 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import type { AnyStyle, StyleClass, StyleContent } from "../lib/styles/types";
 import { StyleContext } from "@/context";
+import stylesContent from "@/lib/styles/styles.json";
+
+type StyleJson = typeof stylesContent;
 export interface StylesState {
   stylesContent: StyleContent;
   /** Replace the whole tree. */
@@ -29,11 +32,16 @@ export function useStylesState(initial: StyleContent): StylesState {
     (updater: (prev: StyleContent) => StyleContent) => {
       setStylesContent((prev) => updater(prev));
     },
-    []
+    [],
   );
 
   const setStyleProperty = useCallback(
-    (target: string, element: string, styleKey: string, value: AnyStyle[keyof AnyStyle]) => {
+    (
+      target: string,
+      element: string,
+      styleKey: string,
+      value: AnyStyle[keyof AnyStyle],
+    ) => {
       setStylesContent((prev) => {
         const prevClass: StyleClass = prev[target] ?? {};
         const prevElementStyle: AnyStyle = prevClass[element] ?? {};
@@ -49,7 +57,7 @@ export function useStylesState(initial: StyleContent): StylesState {
         };
       });
     },
-    []
+    [],
   );
 
   const removeStyleProperty = useCallback(
@@ -68,7 +76,7 @@ export function useStylesState(initial: StyleContent): StylesState {
         };
       });
     },
-    []
+    [],
   );
 
   const addElement = useCallback((target: string, element: string) => {
@@ -88,27 +96,61 @@ export function useStylesState(initial: StyleContent): StylesState {
     }));
   }, []);
 
-  return {
-    stylesContent,
-    setStylesContent,
-    updateStylesContent,
-    setStyleProperty,
-    removeStyleProperty,
-    addElement,
-    addTarget,
-  };
+  return useMemo(
+    () => ({
+      stylesContent,
+      setStylesContent,
+      updateStylesContent,
+      setStyleProperty,
+      removeStyleProperty,
+      addElement,
+      addTarget,
+    }),
+    [addElement, addTarget, removeStyleProperty, setStyleProperty, stylesContent, updateStylesContent],
+  );
 }
-
-
 
 export const useStyles = () => {
-
   try {
     const context = useContext(StyleContext);
-    return context;
-    
+    if (!context) {
+      throw new Error("Context is null or undefined");
+    }
+    return useMemo(() => context, [context]);
   } catch (error) {
-    console.error("UseStyles must in a <Styles> </Styles> Provider.")
-    
+    console.error(error);
+    throw new Error("UseStyles must in a <StyleProvider> </StyleProvider> Provider.");
   }
+};
+
+interface UseStylesTarget<T extends keyof StyleJson> {
+  styles: StyleJson[T];
+  updateStyles: Function // TODO: MAke this an actual updater
+  setProperty: (element: keyof StyleJson[T], styleKey: string, value: AnyStyle[keyof AnyStyle]) => void
+
 }
+
+export const useStyleTarget = <T extends keyof StyleJson>(target: T): UseStylesTarget<T> => {
+  const { stylesContent, updateStylesContent, setStyleProperty } = useStyles();
+
+  const styles = useMemo(
+    () => stylesContent[target] as StyleJson[T],
+    [stylesContent, target],
+  );
+
+  const setProperty = useCallback(
+    (element: keyof StyleJson[T], styleKey: string, value: AnyStyle[keyof AnyStyle]) => {
+      setStyleProperty(target, element as string, styleKey, value);
+    },
+    [setStyleProperty, target],
+  );
+
+  return useMemo(
+    () => ({
+      styles,
+      updateStyles: updateStylesContent,
+      setProperty,
+    }),
+    [setProperty, styles, updateStylesContent],
+  );
+};

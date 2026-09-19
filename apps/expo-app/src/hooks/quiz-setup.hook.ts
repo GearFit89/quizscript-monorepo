@@ -1,17 +1,11 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-} from "react";
-import { QuizMode } from "@bq/shared/types";
-import { useActor, useActorRef } from "@xstate/react";
+import { useCallback, useContext, useMemo, useState } from "react";
+import type { QuizMode } from "@bq/shared/types";
 import type {
   DifficultyLevel,
   QuestionFilters,
   BibleKey,
 } from "@bq/shared/types";
 import { QuizSetupContext } from "@/context";
-import { BIBLE_BOOKS } from "@bq/shared/utils";
 
 const defualtQuizFilters: QuestionFilters = {
   months: [],
@@ -55,7 +49,6 @@ export function useQuizSetupState<Mode_T>({
   initialMode,
   id,
 }: QuizSetupStateArgs<Mode_T>): QuizSetupState<Mode_T> {
-  // Single source for setup data
   const [data, setData] = useState<QuizSetupData<Mode_T>>({
     id,
     quizType,
@@ -64,66 +57,63 @@ export function useQuizSetupState<Mode_T>({
     questionFilters: defualtQuizFilters,
   });
 
-  //  Helpers to set certain fields directly
-  const setMode = (mode: Mode_T) => {
+  const setMode = useCallback((mode: Mode_T) => {
     setData((prev) => ({ ...prev, mode }));
-  };
+  }, []);
 
-  const setDifficulty = (difficultyLevel: DifficultyLevel) => {
+  const setDifficulty = useCallback((difficultyLevel: DifficultyLevel) => {
     setData((prev) => ({ ...prev, difficultyLevel }));
-  };
+  }, []);
 
-  // FIXME: When I can understand and needed this uncomment this
-  // const setQuestionFilters: React.Dispatch<React.SetStateAction<QuestionFilters>> = (action) => {
-  //   setData((prev) => {
-  //     const currentFilters = prev.questionFilters ?? defualtQuizFilters;
-  //     const nextFilters = typeof action === 'function' ? action(currentFilters) : action;
-  //     return { ...prev, questionFilters: nextFilters };
-  //   });
-  // };
-
-  const updateQuestionFilters = <K extends keyof QuestionFilters>(
-    key: K,
-    value: QuestionFilters[K],
-  ) => {
-    setData((prev) => ({
-      ...prev,
-      questionFilters: {
-        ...(prev.questionFilters ?? defualtQuizFilters),
-        [key]: value,
-      },
-    }));
-  };
-  const updateBibleRef = <K extends BibleKey>(
-    bibleKey: BibleKey,
-    value: QuestionFilters["chapters"][K],
-  ) => {
-    setData((prev) => ({
-      ...prev,
-      questionFilters: {
-        ...(prev.questionFilters ?? defualtQuizFilters),
-        chapters: {
-          ...prev.questionFilters?.chapters,
-          [bibleKey]: value,
+  const updateQuestionFilters = useCallback(
+    <K extends keyof QuestionFilters>(key: K, value: QuestionFilters[K]) => {
+      setData((prev) => ({
+        ...prev,
+        questionFilters: {
+          ...(prev.questionFilters ?? defualtQuizFilters),
+          [key]: value,
         },
-      },
-    }));
-  };
+      }));
+    },
+    [],
+  );
 
-  const updateData = (newData: Partial<QuizSetupData<Mode_T>>) => {
+  const updateBibleRef = useCallback(
+    <K extends BibleKey>(
+      bibleKey: BibleKey,
+      value: QuestionFilters["chapters"][K],
+    ) => {
+      setData((prev) => ({
+        ...prev,
+        questionFilters: {
+          ...(prev.questionFilters ?? defualtQuizFilters),
+          chapters: {
+            ...prev.questionFilters?.chapters,
+            [bibleKey]: value,
+          },
+        },
+      }));
+    },
+    [],
+  );
+
+  const updateData = useCallback((newData: Partial<QuizSetupData<Mode_T>>) => {
     setData((prev) => ({ ...prev, ...newData }));
-  };
+  }, []);
 
-  return {
-    data,
-    setMode,
-    setDifficulty,
-    updateData,
-    updateBibleRef,
-    // setQuestionFilters,
-    updateQuestionFilters,
-  };
+  return useMemo(
+    () => ({
+      data,
+      setMode,
+      setDifficulty,
+      updateData,
+      updateBibleRef,
+      updateQuestionFilters,
+    }),
+    [data, setDifficulty, setMode, updateBibleRef, updateData, updateQuestionFilters],
+  );
 }
+
 export function useQuizSetup<Mode_T>(): QuizSetupState<Mode_T> {
   const context = useContext(QuizSetupContext);
   if (!context) {

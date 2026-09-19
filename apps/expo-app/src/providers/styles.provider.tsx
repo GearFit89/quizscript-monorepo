@@ -8,6 +8,11 @@ interface StylesProviderProps {
     
      
 }
+export type StylesT = typeof stylesContent;
+type e = keyof StylesT
+type r = StylesT[e]
+const s: e = 'page'
+
 
 export function StylesProvider({
     children

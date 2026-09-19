@@ -1,18 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { QUIZ_REGISTRY } from "@/lib/quiz-registry";
-import { ScrollView, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 
 import { useEffect } from "react";
 import { ElementInspector } from "react-native-element-inspector";
+import { FloatingStyleEditorButton } from "@/components/styles/floating-button";
+import { useStyles, useStyleTarget } from "@/hooks";
 
 
 
 
 export default function HomePage() {
+    const { styles } = useStyleTarget("home")
 
     return (
-        <ElementInspector enabled={__DEV__}>
+        
             <View>
             <Text>
                 This is an app! 
@@ -20,14 +23,21 @@ export default function HomePage() {
                
 
             </Text>
-            <Button>
+            <Pressable style= { ({pressed})=>({
+                ...styles.title,
+               
+                backgroundColor: pressed ? "red" : "blue",
+                   
 
-            </Button>
-            <Button variant={"outline"}></Button>
-            <View className="bg-red-500 p-4 rounded-full"/>
+
+            }) }>
+                <Text>Hi</Text>
+            </Pressable>
+         
+           
             </View>
             
-        </ElementInspector>
+        
     )
 
     

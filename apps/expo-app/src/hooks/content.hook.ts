@@ -1,27 +1,23 @@
-import React, { createContext, useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import type { Content } from "@/lib/content/types";
-import { useLanguage } from "./language.hook";
 import { ContentContext } from "@/context";
-// 1. Define the Context shape
+import contentJson from "@/lib/content";
+import { useState } from "react";
 export interface ContentContextValue {
   content: Content;
 }
 
-
-
 export function useContent<T = Content>(
-  selector?: (data: Content) => T
+  selector?: (data: Content) => T,
 ): T {
-  const context = useContext(ContentContext);
+ const [content, setContent] = useState(contentJson)
 
-  if (!context) {
-    throw new Error("useContent must be used within a <ContentProvider>");
-  }
-
-  return selector ? selector(context.content) : (context.content as T);
+  return useMemo(
+    () => (selector ? selector(content) : (content as T)),
+    [content, selector],
+  );
 }
 
-// 4. Convenience Hooks
 export function useSetupContent() {
   return useContent((c) => c.setup);
 }
