@@ -7,5 +7,8 @@ node_modules/
 dist/
 .env
 
+*.env.local
+
 .env.local
 test-env.ts
+*test-env.ts

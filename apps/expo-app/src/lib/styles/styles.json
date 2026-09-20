@@ -1,0 +1,16 @@
+{
+    "home": {
+        "title":{
+            "width": 23
+        },
+        "name":{
+            "width": 899
+        }
+
+    },
+    "page":{
+        "read":{
+            "hiegth":89
+        }
+    }
+}

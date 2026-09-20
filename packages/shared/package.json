@@ -1,6 +1,13 @@
 {
-  "name": "@bq/shared", 
+  "name": "@bq/shared",
   "version": "1.0.0",
   "main": "./src/index.ts",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "pino": "^10.3.1",
+    "xstate": "^5.32.5"
+  },
+  "devDependencies": {
+    "pino-pretty": "^13.1.3"
+  }
 }
