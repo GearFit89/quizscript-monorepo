@@ -5,4 +5,10 @@ node_modules/
 
 .expo/
 dist/
-.env.env.local
+.env
+
+*.env.local
+
+.env.local
+test-env.ts
+*test-env.ts
