@@ -128,10 +128,10 @@ export async function getTBQNQuestions(params: Partial<TBQNParams>) {
           acc[id] = {} as TBQNQuestion; // So that typescript doesn't throw a type error
         }
 
-        if (fieldType === "0") acc[id].ref = data;
-        if (fieldType === "1") acc[id].question = data;
+        if (fieldType === "1") acc[id].ref = data;
         if (fieldType === "2") acc[id].flight = data;
-        if (fieldType === "3") acc[id].answer = data;
+        if (fieldType === "3") acc[id].question = data;
+        if (fieldType === "4") acc[id].answer = data;
 
         return acc;
       },
