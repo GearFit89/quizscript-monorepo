@@ -14,3 +14,16 @@ export interface QuestionFilters {
 
 
  export type BibleKey = keyof typeof BIBLE_BOOKS
+
+
+
+ export interface Question<Q= string, A= string, QuestT = "question" | "verse"> {
+    id: number;
+    flight?: string []
+    book?: string;
+    chapter?: number|string;
+    ref: string
+    question: Q;
+    answer: A;
+    type: QuestT
+ }
