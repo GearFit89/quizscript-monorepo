@@ -22,6 +22,7 @@ import { getStyleKeyMeta } from "@/lib/styles/styleKeyMeta";
 import type { EditorLevel, StyleContent } from "@/lib/styles/types";
 import { useStyles } from "@/hooks"
 import { CopyButton } from "../cpoy-button";
+import { Button } from "../ui/button";
 
 export interface StyleEditorSheetRef {
   open: () => void;
@@ -55,7 +56,7 @@ interface StyleEditorSheetProps {
 export const StyleEditorSheet = forwardRef<StyleEditorSheetRef, StyleEditorSheetProps>(
   ({ onStylesChange, onOpenChange }, ref) => {
     const [visible, setVisible] = useState(false);
-    const { stylesContent, setStyleProperty, removeStyleProperty, exportJSON } =
+    const { stylesContent, setStyleProperty, removeStyleProperty, exportJSON, resetStyles } =
       useStyles();
 
     const [level, setLevel] = useState<EditorLevel>("targets");
@@ -163,6 +164,7 @@ export const StyleEditorSheet = forwardRef<StyleEditorSheetRef, StyleEditorSheet
               </View>
 
               <CopyButton textToCopy={exportJSON()} />
+              <Button onPress={resetStyles}><Text>Reset Styles</Text></Button>
           
 
               

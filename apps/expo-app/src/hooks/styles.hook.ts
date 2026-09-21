@@ -11,6 +11,7 @@ export interface StylesState {
   /** Replace the whole tree. */
   setStylesContent: (next: StyleContent) => void;
   exportJSON: () => string;
+  resetStyles: () => void;
   /** Functional update of the whole tree. */
   updateStylesContent: (updater: (prev: StyleContent) => StyleContent) => void;
   /** Set (or overwrite) a single style property on target.element. */
@@ -63,6 +64,7 @@ export function useStylesState(initial: StyleContent): StylesState {
     [],
   );
 
+
   const removeStyleProperty = useCallback(
     (target: string, element: string, styleKey: string) => {
       setStylesContent((prev) => {
@@ -92,6 +94,11 @@ export function useStylesState(initial: StyleContent): StylesState {
     }));
   }, []);
 
+const resetStyles = useCallback(() => {
+  setStylesContent(initial);
+  console.debug("Styles Reset")
+
+}, [])
 
 const exportJSON = useCallback(() => {
   const json = JSON.stringify(stylesContent);
@@ -111,6 +118,7 @@ const exportJSON = useCallback(() => {
   return useMemo(
     () => ({
       stylesContent,
+      resetStyles,
       exportJSON,
       setStylesContent,
       updateStylesContent,

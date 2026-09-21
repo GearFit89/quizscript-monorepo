@@ -1,16 +1,69 @@
 {
-    "home": {
-        "title":{
-            "width": 23
-        },
-        "name":{
-            "width": 899
-        }
-
+  "home": {
+    "title": {
+      "width": 23
     },
-    "page":{
-        "read":{
-            "hiegth":89
-        }
+    "name": {
+      "width": 899
     }
+  },
+  "page": {
+    "read": {
+      "hiegth": 89
+    }
+  },
+  "quiz-setup": {},
+  "difficultyOption": {
+    "container": {
+      "padding": 16,
+      "marginVertical": 8,
+      "borderRadius": 12,
+      "borderWidth": 1
+    },
+    "superHard": {
+      "backgroundColor": "#f3e8ff",
+      "borderColor": "#7e22ce"
+    },
+    "superHardTitle": {
+      "color": "#581c87"
+    },
+    "superHardDesc": {
+      "color": "#6b21a8"
+    },
+    "hard": {
+      "backgroundColor": "#fecaca",
+      "borderColor": "#b91c1c"
+    },
+    "hardTitle": {
+      "color": "#7f1d1d"
+    },
+    "hardDesc": {
+      "color": "#991b1b"
+    },
+    "medium": {
+      "backgroundColor": "#fed7aa",
+      "borderColor": "#c2410c"
+    },
+    "mediumTitle": {
+      "color": "#7c2d12"
+    },
+    "mediumDesc": {
+      "color": "#9a3412"
+    },
+    "easy": {
+      "backgroundColor": "#fef08a",
+      "borderColor": "#a16207"
+    },
+    "easyTitle": {
+      "color": "#713f12"
+    },
+    "easyDesc": {
+      "color": "#854d0e"
+    },
+    "desc": {
+      "marginTop": 4,
+      "fontSize": 14,
+      "lineHeight": 20
+    }
+  }
 }
