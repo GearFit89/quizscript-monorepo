@@ -542,7 +542,7 @@
   "91": {
     "ref": "1 Thess 3:09",
     "flight": "T",
-    "question": "To whom do we return thanksgiving for you?",
+    "question": "To whom do we return thanksgiving for you?`",
     "answer": "God"
   },
   "92": {
@@ -1170,13 +1170,13 @@
     "answer": "The grace of the Lord Jesus Christ"
   },
   "196": {
-    "ref": "1 Thess 5:14",
+    "ref": "1 Thess. 5:14",
     "flight": "T",
-    "question": "According to 1 Thess 5:14, what do we urge you?",
+    "question": "According to 1 Thess. 5:14, what do we urge you?",
     "answer": "Admonish the idle, encourage the fainthearted, help the weak, be patient with them all"
   },
   "197": {
-    "ref": "1 Thess 1:04",
+    "ref": "1Thess 1:04",
     "flight": "C",
     "question": "Who has chosen you?",
     "answer": "God"
