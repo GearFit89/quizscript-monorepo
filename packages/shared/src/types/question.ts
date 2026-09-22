@@ -19,7 +19,7 @@ export interface QuestionFilters {
 
  export interface Question<Q= string, A= string, QuestT = "question" | "verse"> {
     id: number;
-    flight?: string []
+    flight?: string;
     book?: string;
     chapter?: number|string;
     ref: string
@@ -27,3 +27,6 @@ export interface QuestionFilters {
     answer: A;
     type: QuestT
  }
+
+
+export type BookRange = Record<string, number[]>

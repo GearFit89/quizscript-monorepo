@@ -7,6 +7,9 @@
     "pino": "^10.3.1",
     "xstate": "^5.32.5"
   },
+  "scripts": {
+    "test": "vitest"
+  },
   "devDependencies": {
     "pino-pretty": "^13.1.3"
   }

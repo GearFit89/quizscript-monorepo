@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        /* Target & Environment */
+        "target": "ES2022",
+        "moduleResolution": "bundler",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        /* Output Strategy */
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        /* Strict Type Checking */
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitReturns": true,
+        /* Interop & Modern Behavior */
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        /* Shared Library Optimization */
+        "skipLibCheck": true,
+        "isolatedModules": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
