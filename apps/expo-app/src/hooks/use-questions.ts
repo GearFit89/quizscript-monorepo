@@ -32,7 +32,7 @@ export function useFilteredQuestions ({ filterCriteria }: { filterCriteria: AppF
       
           if(!data) return [];
           if(!filterCriteria) return data;
-          const filtered = multiQuestionFilter(data.slice(0, 23), filterCriteria, true);
+          const filtered = multiQuestionFilter(data, filterCriteria, true);
           console.debug("filtered: ", filtered)
           return filtered;
 

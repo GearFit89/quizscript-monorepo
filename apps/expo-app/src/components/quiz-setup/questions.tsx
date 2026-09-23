@@ -1,26 +1,28 @@
 import { useQuizSetup } from "@/hooks";
 import { useFilteredQuestions, useQuestions } from "@/hooks/use-questions";
-import { useMemo } from "react";
-import { Modal, View } from "react-native"
-import { Text } from "@/components/ui/text"
+import { useEffect, useMemo } from "react";
+import { Modal, View } from "react-native";
+import { Text } from "@/components/ui/text";
 
+export function FilteredQuestions() {
+  const { data, isQuizValid, setIsQuizVaild, minQuizQuestionLength } =
+    useQuizSetup();
 
-export function FilteredQuestions () {
-    const { data } = useQuizSetup()
-   
-    if(!data.questionFilters) return null;
+  if (!data.questionFilters) return null;
 
-    const {questions, isLoading, isLoadingError, error} = useFilteredQuestions({ filterCriteria: data.questionFilters});
-const { data: Questions } = useQuestions()
+  const { questions, isLoading, isLoadingError, error } = useFilteredQuestions({
+    filterCriteria: data.questionFilters,
+  });
+  useEffect(() => {
+    setIsQuizVaild(questions.length >= minQuizQuestionLength);
+  }, [questions]);
 
-    return (
-        <View><Text>{questions.length ?? "No Questions"}</Text>
-        
-        <Text>{JSON.stringify(questions)}</Text>
-        <Text>Loading: {isLoading}</Text>
-         <Text>Error: {error?.message}</Text>
-           <Text>{JSON.stringify(Questions)}</Text>
+  return (
+    <View>
+      <Text>{questions.length ?? "No Questions"}</Text>
 
-        </View>
-    )
+    
+      <Text style={{color: isQuizValid ? "black" : "red"}}>{isQuizValid ? "Quiz is valid" : "Quiz is not vaild"}</Text>
+    </View>
+  );
 }

@@ -31,6 +31,7 @@ export default function MaterialSelection() {
   } = useQuizSetup();
   const { questionFilters } = data;
 
+  console.debug(defualtQuizFilters.bookRange, "jjjkj")
   const [openBook, setOpenBook] = useState<string>("");
   const [materialSelected, setMaterialSelected] =
     useState<QuestionFilterMode>("MONTHS");
@@ -87,7 +88,7 @@ export default function MaterialSelection() {
             }
             collapsible
           >
-            {Object.keys(defualtQuizFilters).map((bookName) => (
+            {Object.keys(defualtQuizFilters.bookRange).map((bookName) => (
               <AccordionItem key={bookName} value={`material-${bookName}`}>
                 <AccordionTrigger>
                   <Text>{bookName}</Text>

@@ -90,7 +90,7 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
 
   const handleMultiChange = (_name: string, optionValue: string, checked: boolean) => {
     
-    if(props.value.length === 1){
+    if(props.value.length === 1 && props.value.includes(_name)){
       // Makes completely empty states impossible
       props.onChange(props.value);
       return;

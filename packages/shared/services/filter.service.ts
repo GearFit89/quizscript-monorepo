@@ -5,6 +5,7 @@ import type {
   BookRange,
   BaseQuestion,
 } from "../src/types";
+import { extractRefObject } from "../src/utils";
 
 /**
  *
@@ -42,9 +43,10 @@ export function multiQuestionFilter<
       }
       if (criteriaVal.length === 0) return true;
       if (!itemVal) {
+        //console.debug("wretrun here", itemVal, criteriaVal)
         return shoulIncludeMissingKeys;
       }
-
+//console.debug("retrun hereww, ", criteriaVal.includes(itemVal as never))
       return criteriaVal.includes(itemVal as never);
     });
   });
@@ -58,10 +60,20 @@ function checkBookRanage(
   // If book range doesn't exit, then the item passes
   if (!bookRange) return true;
 
-  const chapter = item.chapter;
-  const book = item.book;
+  let chapter = item.chapter;
+  let book = item.book;
 
+  if(!book || !chapter){
+    try{
+    const refObject = extractRefObject((item as any)?.ref ?? "");
+    book = refObject.book;
+    chapter = refObject.chapter;
+    } catch{
+      return false
+    }
+  }
   if (!includedBooks.has(book)) {
+    //console.debug("retrun here")
   
     return false;
   }
@@ -74,12 +86,12 @@ function checkBookRanage(
   // }
   // If the book exists, but the chapter array doesn't have anything, it won't pass.
   if (!allowedChapters || allowedChapters.length === 0) {
-     
+     //console.debug("retrun here2")
     return false; // TODO: figure this out
   }
 
   const includedChapters = new Set(allowedChapters);
 
-   
+   //console.debug("retrun here3", includedChapters.has(chapter))
   return includedChapters.has(chapter);
 }
