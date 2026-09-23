@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useContext, useMemo, useState } from "react";
 import { BookRange, type QuizMode } from "@bq/shared/types";
 import type {
   DifficultyLevel,
@@ -20,6 +20,9 @@ export interface QuizSetupData<Mode_T> {
 export interface QuizSetupState<Mode_T> {
   data: QuizSetupData<Mode_T>;
   defualtQuizFilters: AppFilterCriteria;
+  isQuizValid: boolean;
+  minQuizQuestionLength: number,
+  setIsQuizVaild: Dispatch<SetStateAction<boolean>>
   setMode: (mode: Mode_T) => void;
   setDifficulty: (difficulty: DifficultyLevel) => void;
   updateData: (newData: Partial<QuizSetupData<Mode_T>>) => void;
@@ -37,12 +40,14 @@ export interface QuizSetupStateArgs<Mode_T> {
   initialMode: Mode_T;
   quizType: QuizMode;
   id: string;
+  minQuizQuestionLength: number
 }
 
 export function useQuizSetupState<Mode_T>({
   quizType,
   initialMode,
   id,
+  minQuizQuestionLength
 }: QuizSetupStateArgs<Mode_T>): QuizSetupState<Mode_T> {
 
   const { filterSection } = useSetupContent()
@@ -61,8 +66,10 @@ export function useQuizSetupState<Mode_T>({
     quizType,
     mode: initialMode,
     difficultyLevel: "easy",
+    
     questionFilters: defualtQuizFilters,
   });
+  const [isQuizValid, setIsQuizVaild] = useState<boolean>(true);
   
   const setMode = useCallback((mode: Mode_T) => {
     setData((prev) => ({ ...prev, mode }));
@@ -113,13 +120,16 @@ export function useQuizSetupState<Mode_T>({
     () => ({
       data,
       defualtQuizFilters,
+      isQuizValid,
+      minQuizQuestionLength,
+      setIsQuizVaild,
       setMode,
       setDifficulty,
       updateData,
       updateBibleRef,
       updateFilterCriteria,
     }),
-    [data, setDifficulty, setMode, updateBibleRef, updateData, updateFilterCriteria],
+    [data, setDifficulty, setMode, updateBibleRef, updateData, updateFilterCriteria, isQuizValid, setIsQuizVaild],
   );
 }
 

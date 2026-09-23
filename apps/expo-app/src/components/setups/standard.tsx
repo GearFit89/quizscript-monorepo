@@ -34,6 +34,7 @@ export default function StandardSetup (){
             id={id} 
             quizType={type}
             initialMode={"normal"}
+            minQuizQuestionLength={20}
 
 
          >
