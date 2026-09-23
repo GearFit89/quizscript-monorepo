@@ -8,12 +8,12 @@ export interface FilterOptionDef {
   label: string;
   value: string;
   disabled?: boolean;
-}
+} 
 
 interface BaseProps {
   title: string;
   name: string;
-  options: FilterOptionDef[];
+  options: FilterOptionDef[] | string[];
   type: FilterOptionType;
   isWrapLayout?: boolean
   className?: string;
@@ -59,6 +59,7 @@ export type QuestionFilterSectionProps = SingleProps | MultiProps;
  */
 export function QuestionFilterSection(props: QuestionFilterSectionProps) {
   const { title, name, options, className } = props;
+  
 
   if (props.type === 'single') {
     return (
@@ -68,17 +69,17 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
           <View className={props.isWrapLayout ? "flex-row flex-wrap gap-2": "gap 1"}>
           {options.map((opt) => (
             <QuestionFilterOption
-              key={`${name}-${opt.value}`}
+              key={`${name}-${opt}`}
               type="single"
               name={name}
-              value={opt.value}
-              label={opt.label}
-              checked={props.value === opt.value}
-              variant={props.variant}
+            value={typeof opt === "string" ? opt : opt.value}
+            label={typeof opt === "string" ? opt : opt.label}
+            checked={props.value.includes(typeof opt === "string" ? opt : opt.value)}
+            variant={props.variant}
               
               // Use the onChange from the parent QuestionFilterSection
               onChange={(_n, v) => props.onChange(v)}
-              disabled={opt.disabled}
+              disabled={typeof opt === "string" ? false : opt.disabled}
             />
           ))}
           </View>
@@ -88,6 +89,12 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
   }
 
   const handleMultiChange = (_name: string, optionValue: string, checked: boolean) => {
+    
+    if(props.value.length === 1){
+      // Makes completely empty states impossible
+      props.onChange(props.value);
+      return;
+    }
     // Either rm or add a item if checked
     const next = checked
       ? [...props.value, optionValue]
@@ -101,15 +108,15 @@ export function QuestionFilterSection(props: QuestionFilterSectionProps) {
       <View className={props.isWrapLayout ? "flex-row flex-wrap gap-2": "gap 1"}>
         {options.map((opt) => (
           <QuestionFilterOption
-            key={`${name}-${opt.value}`}
+            key={`${name}-${typeof opt === "string" ? opt : opt.value}`}
             type="multi"
             variant={props.variant}
             name={name}
-            value={opt.value}
-            label={opt.label}
-            checked={props.value.includes(opt.value)}
+            value={typeof opt === "string" ? opt : opt.value}
+            label={typeof opt === "string" ? opt : opt.label}
+            checked={props.value.includes(typeof opt === "string" ? opt : opt.value)}
             onChange={handleMultiChange}
-            disabled={opt.disabled}
+            disabled={typeof opt === "string" ? false : opt.disabled}
           />
         ))}
       </View>

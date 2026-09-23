@@ -8,7 +8,7 @@ import { useSetupContent } from '@/hooks';
 
 export default function DefaultQuizFilters() {
   const { filterSection } = useSetupContent()
-  const { updateQuestionFilters: updateFilter , data } = useQuizSetup();
+  const { updateFilterCriteria: updateFilter , data } = useQuizSetup();
   const { questionFilters } = data;
   
   return (
@@ -21,8 +21,8 @@ export default function DefaultQuizFilters() {
       name={filterSection.questionType.title}
         title={filterSection.questionType.title}
         options={filterSection.questionType.options}
-        value={questionFilters?.questionType ?? [] }
-        onChange={(val) => updateFilter('questionType', val)}
+        value={questionFilters?.type as string [] ?? [] }
+        onChange={(val) => updateFilter('type', val as any)}
       />
 
       <QuestionFilterSection
@@ -30,8 +30,8 @@ export default function DefaultQuizFilters() {
        name={filterSection.questionType.title}
         title={filterSection.flight.title}
         options={filterSection.flight.options}
-        value={questionFilters?.flights ?? []}
-        onChange={(val) => updateFilter('flights', val)}
+        value={questionFilters?.flight as string [] ?? []}
+        onChange={(val) => updateFilter('flight', val)}
       />
  
     </View>

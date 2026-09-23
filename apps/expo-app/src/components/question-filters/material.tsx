@@ -9,9 +9,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useSetupContent } from "@/hooks";
-import { getChapters, BIBLE_BOOKS } from "@bq/shared/utils";
+
 import { BibleKey } from "@bq/shared/types";
 
 type QuestionFilterMode = "MONTHS" | "BIBLE";
@@ -24,8 +24,9 @@ const FILTERS = {
 export default function MaterialSelection() {
   const { filterSection } = useSetupContent();
   const {
-    updateQuestionFilters: updateFilter,
+    updateFilterCriteria: updateFilter,
     data,
+    defualtQuizFilters,
     updateBibleRef,
   } = useQuizSetup();
   const { questionFilters } = data;
@@ -34,7 +35,17 @@ export default function MaterialSelection() {
   const [materialSelected, setMaterialSelected] =
     useState<QuestionFilterMode>("MONTHS");
 
-  console.log(filterSection.questionType, filterSection.chapters);
+  //     const bookRangeOptions = useMemo(() => {
+  //   return (Object.keys(defualtQuizFilters.bookRange) as BibleKey []).reduce((acc, bookName) => {
+  //     acc[bookName] = (defualtQuizFilters.bookRange[bookName] ?? []).map((b) => ({
+  //       value: String(b),
+  //       label: String(b),
+  //     }));
+  //     return acc;
+  //   }, {} as Record<BibleKey, { value: string; label: string }[]>);
+  // }, [])
+
+  console.debug("filter", questionFilters);
 
   return (
     <View>
@@ -63,8 +74,8 @@ export default function MaterialSelection() {
               name={filterSection.questionType.title}
               title={filterSection.months.title}
               options={filterSection.months.options}
-              value={questionFilters?.months ?? []}
-              onChange={(val) => updateFilter("months", val)}
+              value={(questionFilters?.month as string[]) ?? []}
+              onChange={(val) => updateFilter("month", val)}
             />
           </View>
         ) : (
@@ -76,7 +87,7 @@ export default function MaterialSelection() {
             }
             collapsible
           >
-            {Object.keys(BIBLE_BOOKS).map((bookName) => (
+            {Object.keys(defualtQuizFilters).map((bookName) => (
               <AccordionItem key={bookName} value={`material-${bookName}`}>
                 <AccordionTrigger>
                   <Text>{bookName}</Text>
@@ -88,12 +99,11 @@ export default function MaterialSelection() {
                     type="multi"
                     name={filterSection.questionType.title}
                     title={filterSection.questionType.title}
-                    options={getChapters(bookName as BibleKey).map((c) => ({
-                      label: String(c),
-                      value: String(c),
-                    }))}
+                    options={
+                      defualtQuizFilters.bookRange[bookName as BibleKey] ?? []
+                    }
                     value={
-                      questionFilters?.chapters[bookName as BibleKey] ?? []
+                      questionFilters?.bookRange[bookName as BibleKey] ?? []
                     }
                     onChange={(val) =>
                       updateBibleRef(bookName as BibleKey, val)
