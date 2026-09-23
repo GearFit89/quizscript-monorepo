@@ -1,4 +1,4 @@
-import { QuizMode } from "@bq/shared/types";
+import { BookRange, QuizMode } from "@bq/shared/types";
 import { IconKey } from "../icons";
 
 
@@ -46,11 +46,7 @@ export interface QuizFilterSection {
     title: string;
     options: Option[];
   };
-  chapters: {
-    title: string;
-    options: Option[]; // Assuming same structure as other options arrays
-    empty: string;
-  };
+  
   triggerWords: {
     title: string;
     options: Option[];

@@ -12,15 +12,12 @@ export function BottomNav(props: BottomTabBarProps ) {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
 
-  // Hide bottom nav on routes outside tabs (e.g., /setup)
-  if (pathname.includes('/setup')) {
-    return null;
-  }
 
   const navItems = [
     { name: 'Home', path: '/(tabs)/', icon: 'home-outline', activeIcon: 'home' },
     { name: 'Search', path: '/(tabs)/search', icon: 'search-outline', activeIcon: 'search' },
     { name: 'Profile', path: '/(tabs)/profile', icon: 'person-outline', activeIcon: 'person' },
+    {name: "Practice", path: '/(tabs)/practice', icon: "book-outline", activeIcon: "book"}
   ];
   const { styles } = useStyleTarget("bottomNav")
 
