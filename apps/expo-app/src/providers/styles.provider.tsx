@@ -1,6 +1,6 @@
 import { useStylesState } from "@/hooks"
 import type { StyleContent } from "@/lib/styles";
-import stylesContent from "@/lib/styles/styles.json"
+import { stylesContent } from "@/lib/styles/content"
 import { StyleContext } from "@/context";
 interface StylesProviderProps {
     children: React.ReactNode;
