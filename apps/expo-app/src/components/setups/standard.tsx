@@ -11,6 +11,7 @@ import { useQuestions } from "@/hooks/use-questions";
 import { multiQuestionFilter } from "@bq/shared/services/filter.service";
 import { useMemo } from "react";
 import { FilteredQuestions } from "../quiz-setup/questions";
+import QuizStartButton from "../quiz-setup/quiz-start-button";
 
 export default function StandardSetup (){
 
@@ -20,14 +21,6 @@ export default function StandardSetup (){
     const { standard: content } = useSetupContent();
     
 
-    const handleQuizStart = () => {
-
-        actorRef.send({ type: "NORMAL_QUIZ" });
-        router.push(`/quiz/${id}`)
-
-
-    }
-   
     
     return (
         <QuizSetupProvider 
@@ -57,7 +50,7 @@ export default function StandardSetup (){
 
            <DefaultQuizFilters />
            <FilteredQuestions />
-            <Button onPress={handleQuizStart} />
+        <QuizStartButton />
         </QuizSetupProvider>
     )
 }
