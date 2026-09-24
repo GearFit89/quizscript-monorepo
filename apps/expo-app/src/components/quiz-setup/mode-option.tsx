@@ -1,47 +1,55 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable,  View } from "react-native";
 import { IconKey } from "@/lib/icons";
 import Icon from "../icon";
 import { Text } from "../ui/text";
-import { useQuizSetup } from "@/hooks/quiz-setup.hook";
-import { QuizMode  } from "@bq/shared/types";
+import { useQuizSetup, useStyleTarget} from "@/hooks"
+import type { AnyStyle } from "@/lib/styles";
+
 
 export interface ModeOptionProps<Mode_T> {
   value: Mode_T;
   title: string;
-  
   icon: IconKey;
   description?: string;
   color?: string;
-  name?: string; // Kept as optional if needed elsewhere
+  name?: string;
 }
-
 
 export default function ModeOption<Mode_T>({
   value,
   title,
   icon,
   description,
-  color = "bg-primary",
+  color = "#007AFF", // Pass a valid color hex/string or token if overriding
 }: ModeOptionProps<Mode_T>) {
   const { setMode } = useQuizSetup<Mode_T>();
+  const [isPressed, setIsPressed] = React.useState(false);
+  const { styles } = useStyleTarget("modeOption");
 
   const handlePress = () => {
+    setIsPressed(!isPressed);
     setMode(value);
   };
 
   return (
     <Pressable
       onPress={handlePress}
-      className={`p-4 my-2 rounded-xl border border-border flex-row items-center justify-between ${color}`}
+      style={[
+        styles.container as AnyStyle,
+        { backgroundColor: color },
+        isPressed ? styles.pressedBorder : styles.defaultBorder,
+      ]}
     >
-      <View className="flex-1 mr-3">
-        <Text variant="p" className="font-bold text-lg">
+      <View style={styles.textContainer}>
+        <Text variant="p" style={styles.titleText as AnyStyle}>
           {title}
         </Text>
-        <Text variant="p" className="text-sm text-muted-foreground mt-1">
-          {description}
-        </Text>
+        {description ? (
+          <Text variant="p" style={styles.descriptionText as AnyStyle}>
+            {description}
+          </Text>
+        ) : null}
       </View>
 
       <Icon color={color} name={icon} />

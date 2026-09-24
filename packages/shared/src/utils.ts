@@ -1,4 +1,4 @@
-import { BibleKey } from "./types";
+import type  { BibleKey, BookRange, RefObject } from "./types";
 
 export function shortenText(text: string, maxLength: number): string {
   const words = text.split(" ");
@@ -12,6 +12,7 @@ export function formatDate(date: Date): string {
     day: "numeric",
   });
 }
+
 /**
  *
  * @param items 
@@ -22,7 +23,7 @@ export function formatDate(date: Date): string {
  * @returns 
  */
 
-export function multiFilter<T extends Record<string, V|V[]>, V>(
+export function multiFilter<T extends Record<string, any> >(
   items: T[],
   criteria: Partial<T>,
   shoulIncludeMissingKeys: boolean = false,
@@ -37,13 +38,12 @@ export function multiFilter<T extends Record<string, V|V[]>, V>(
       if (Array.isArray(criteria[key])) {
         return criteria[key].includes(item[key]);
       }
+      
 
       return item[key] === criteria[key];
     });
   });
 }
-
-
 //================================= BIBLE UTILS ======================================
 /**This will shorten a book ofthe Bible to its common abbreviation
 
@@ -140,3 +140,45 @@ export const BIBLE_BOOKS = {
 export const getChapters = (bookName: BibleKey): number[] =>
   Array.from({ length: BIBLE_BOOKS[bookName].chps ?? 0 }).map((_, i) => i + 1);
 
+export const getBookRange = Object.keys(BIBLE_BOOKS).reduce<BookRange>((acc, b): BookRange=> {
+  const bibleKey = b as BibleKey;
+  acc[bibleKey] = getChapters(bibleKey).map(String)
+  return acc;
+
+}
+
+, {})
+
+export function extractRefObject(ref: string): RefObject {
+  // Matches: "1 John 3:4", "John 8:9", "3 John 7:9", "John 9:0-8"
+  // (\d+\s+)? makes the leading book number and its trailing space optional together
+  const refRegex = /(?:(\d+)\s+)?(\w+)\s+(\d+):(\d+)(?:-(\d+))?/;
+  const matches = ref.match(refRegex);
+
+  
+  if (!matches) {
+    console.error(`${ref} is malformed`);
+    throw new Error(`${ref} is malformed`);
+  }
+
+  // If a book number exists (like '1'), combine it with the book name
+  const bookNumber = matches[1] ? `${matches[1]} ` : "";
+  const bookName = matches[2];
+  
+  const book = `${bookNumber}${bookName}`;
+  const chapter = matches[3] as string;
+  const verse = matches[4] as string
+  const verseRange = matches[5] ?? ""; 
+
+  return {
+    book,
+    chapter,
+    verse,
+    verseRange
+  };
+}
+export function excartRefString ({book, chapter, verse, verseRange}: RefObject): string{
+  const stableVerseRange = verseRange ? `-${verseRange}` : ""
+  return `${book} ${chapter}:${verse}${stableVerseRange}`
+
+}

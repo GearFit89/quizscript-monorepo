@@ -1,0 +1,174 @@
+import { theme } from "../theme";
+
+export const stylesContent = {
+  "home": {
+    "title": {
+      "width": 23
+    },
+    "name": {
+      "width": 899
+    }
+  },
+  "page": {
+    "read": {
+      "height": 89
+    }
+  },
+
+  "difficultyOption": {
+    "container": {
+      "padding": 16,
+      "marginVertical": 8,
+      "borderRadius": 12,
+      "borderWidth": 1
+    },
+    "superHard": {
+      "backgroundColor": "#f3e8ff",
+      "borderColor": "#7e22ce"
+    },
+    "superHardTitle": {
+      "color": "#581c87"
+    },
+    "superHardDesc": {
+      "color": "#6b21a8"
+    },
+    "hard": {
+      "backgroundColor": "#fecaca",
+      "borderColor": "#b91c1c"
+    },
+    "hardTitle": {
+      "color": "#7f1d1d"
+    },
+    "hardDesc": {
+      "color": "#991b1b"
+    },
+    "medium": {
+      "backgroundColor": "#fed7aa",
+      "borderColor": "#c2410c"
+    },
+    "mediumTitle": {
+      "color": "#7c2d12"
+    },
+    "mediumDesc": {
+      "color": "#9a3412"
+    },
+    "easy": {
+      "backgroundColor": "#fef08a",
+      "borderColor": "#a16207"
+    },
+    "easyTitle": {
+      "color": "#713f12"
+    },
+    "easyDesc": {
+      "color": "#854d0e"
+    },
+    "desc": {
+      "marginTop": 4,
+      "fontSize": 14,
+      "lineHeight": 20
+    }
+  },
+  "bottomNav":{
+  "navContainer": {
+    "flexDirection": "row",
+    "height": 65,
+    "backgroundColor": "#ffffff",
+    "borderTopWidth": 1,
+    "borderTopColor": "#e5e5e5",
+    "paddingTop": 8,
+    "justifyContent": "space-around",
+    "alignItems": "center",
+    "position": "absolute",
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "zIndex": 10
+  },
+  "navItem": {
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "navLabel": {
+    "fontSize": 11,
+    "marginTop": 3
+  }
+},
+"questionFilter":{
+  "circleBase": {
+    "width": 36,
+    "height": 36,
+    "borderRadius": 18,
+    "borderWidth": 1,
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "blockBase": {
+    "minWidth": 64,
+    "paddingVertical": 10,
+    "paddingHorizontal": 8,
+    "borderRadius": 12,
+    "borderWidth": 1,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "maxWidth": 500,
+    "marginTop": 8,
+    "marginBottom": 8
+  },
+  "disabled": {
+    "opacity": 0.5
+  }
+},
+"quizSetup":{
+  "sartButton": { 
+    "width": "80%",
+    "backgroundColor":"#f3e8ff"
+  },
+  "quizLength":{
+    "borderColor": "black"
+  }
+
+
+},
+"text":{
+  "white": {
+    "color":"#ffffff"
+  }
+}, 
+modeOption: {
+  container: {
+    padding: 16,
+    marginVertical: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  defaultBorder: {
+    borderColor: theme.colors.border, 
+  },
+  pressedBorder: {
+    borderColor: theme.colors.primary, 
+  },
+  textContainer: {
+    flex: 1,
+    marginRight: 12,
+  },
+  titleText: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "#FFFFFF",
+  },
+  descriptionText: {
+    fontSize: 14,
+    marginTop: 4,
+    color: "#FFFFFF",
+  },
+}
+}
+
+
+
+
+
+

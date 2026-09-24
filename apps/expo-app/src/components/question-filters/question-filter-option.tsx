@@ -3,6 +3,8 @@ import { Pressable, View, StyleSheet } from "react-native";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { useStyleTarget } from "@/hooks";
+import { AnyStyle } from "@/lib/styles";
 
 export type FilterOptionType = "single" | "multi";
 export type FilterOptionVariant = "checkbox" | "circle" | "block";
@@ -114,7 +116,9 @@ export function QuestionFilterOption({
 }: QuestionFilterOptionProps) {
   const labelId = `label-for-${name}-${value}`;
 
-  // --- 'circle' and 'block' variants: no checkbox/radio, just a styled Pressable ---
+  const { styles } = useStyleTarget("questionFilter")
+
+  
   if (variant === "circle" || variant === "block") {
     const handlePress = () => {
       if (disabled) return;
@@ -131,7 +135,7 @@ export function QuestionFilterOption({
   accessibilityState={{ checked, disabled }}
   nativeID={labelId}
   style={[
-    isCircle ? styles.circleBase : styles.blockBase,
+    isCircle ? styles.circleBase as AnyStyle : styles.blockBase as AnyStyle,
     {
       backgroundColor: checked ? COLORS.selectedBg : "#ffffff",
       borderColor: checked ? COLORS.selectedBorder : COLORS.border,
@@ -197,30 +201,3 @@ export function QuestionFilterOption({
   );
 }
 
-const styles = StyleSheet.create({
-  circleBase: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  blockBase: {
-    minWidth: 64,
-    paddingVertical: 10,
-    paddingHorizontal: 8,
-    borderRadius: 12, // matches .book-accordion-item radius
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  maxWidth: 500,
-  
-  
-    marginTop: 8,
-    marginBottom: 8
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-});

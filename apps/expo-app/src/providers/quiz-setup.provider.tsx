@@ -17,6 +17,7 @@ export function QuizSetupProvider<Mode_T>({
     children,
     quizType,
     id, 
+    minQuizQuestionLength,
     initialMode
    }: QuizSetupProviderProps<Mode_T>
 ){
@@ -24,6 +25,7 @@ export function QuizSetupProvider<Mode_T>({
         quizType,
         initialMode,
         id,
+        minQuizQuestionLength
 
     })
    

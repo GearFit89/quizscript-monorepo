@@ -7,7 +7,11 @@ import { useActorRef } from "@xstate/react";
 import { rootMachine } from "@bq/shared/machines";
 import { Button } from "@/components/ui/button"
 import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
-
+import { useQuestions } from "@/hooks/use-questions";
+import { multiQuestionFilter } from "@bq/shared/services/filter.service";
+import { useMemo } from "react";
+import { FilteredQuestions } from "../quiz-setup/questions";
+import QuizStartButton from "../quiz-setup/quiz-start-button";
 
 export default function StandardSetup (){
 
@@ -15,20 +19,15 @@ export default function StandardSetup (){
     const router = useRouter();
     const { id, type } = useLocalSearchParams<{id:string, type: QuizMode}>()
     const { standard: content } = useSetupContent();
+    
 
-    const handleQuizStart = () => {
-
-        actorRef.send({ type: "NORMAL_QUIZ" });
-        router.push(`/quiz/${id}`)
-
-
-    }
     
     return (
         <QuizSetupProvider 
             id={id} 
             quizType={type}
             initialMode={"normal"}
+            minQuizQuestionLength={20}
 
 
          >
@@ -50,8 +49,8 @@ export default function StandardSetup (){
            <SetupDifficultyOption value="hard"/>
 
            <DefaultQuizFilters />
-           
-            <Button onPress={handleQuizStart} />
+           <FilteredQuestions />
+        <QuizStartButton />
         </QuizSetupProvider>
     )
 }
