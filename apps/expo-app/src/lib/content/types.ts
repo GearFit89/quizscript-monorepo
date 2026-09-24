@@ -55,7 +55,7 @@ export interface QuizFilterSection {
     title: string;
     options: Option[];
   };
-  startButton: string;
+  
 }
 interface SetupMode {
          icon: IconKey;
@@ -76,8 +76,12 @@ export interface SetupContent {
    standard: {
       modes: TimedSetupModes
    },
-   filterSection: QuizFilterSection
-
+   filterSection: QuizFilterSection;
+   setupButton: string;
+   errorInvalidQuestionLength: {
+      title: string;
+      message: string;
+   }
 
 }
 export interface Content {

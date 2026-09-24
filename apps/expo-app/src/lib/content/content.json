@@ -95,8 +95,15 @@
           { "label": "C", "value": "C" },
           { "label": "T", "value": "T" }
         ]
-      },
-      "startButton": "Start Quiz"
-    }
+      }
+      
+      
+
+    },
+    "setupButton": "Start Quiz",
+      "errorInvalidQuestionLength":{
+        "title": "Quiz Setup Error",
+        "message": "Please select at least 20 questions."
+      }
   }
 }

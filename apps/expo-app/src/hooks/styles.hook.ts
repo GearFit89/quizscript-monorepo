@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from "react";
 import type { AnyStyle, StyleClass, StyleContent } from "../lib/styles/types";
 import { StyleContext } from "@/context";
-import stylesContent from "@/lib/styles/styles.json";
+import { stylesContent } from "@/lib/styles/content";
 import { NavigationRouteContext } from "expo-router/build/react-navigation";
 import { NativeEventsManager } from "react-native-reanimated";
 
@@ -102,7 +102,7 @@ const resetStyles = useCallback(() => {
 
 const exportJSON = useCallback(() => {
   const json = JSON.stringify(stylesContent);
-  console.debug("json:", json);
+  console.debug("styles json:", json);
 
   return json;
 
