@@ -1,4 +1,5 @@
 import { theme } from "../theme";
+import { AnyStyle } from "./types";
 
 export const stylesContent = {
   "home": {
@@ -165,7 +166,7 @@ modeOption: {
     color: "#FFFFFF",
   },
 }
-}
+} satisfies Record<string, Record<string, AnyStyle>>;
 
 
 

@@ -31,7 +31,7 @@ export default function QuizStartButton() {
     <Button 
     onPress={handleQuizStart} 
     className={`${isQuizValid ? theme.opacity.enabled : theme.opacity.disabled}`}
-    style={styles.sartButton as AnyStyle}
+    style={styles.sartButton }
     disabled={!isQuizValid}
     
     >
