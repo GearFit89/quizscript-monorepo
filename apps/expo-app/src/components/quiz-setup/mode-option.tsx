@@ -36,17 +36,17 @@ export default function ModeOption<Mode_T>({
     <Pressable
       onPress={handlePress}
       style={[
-        styles.container as AnyStyle,
+        styles.container,
         { backgroundColor: color },
         isPressed ? styles.pressedBorder : styles.defaultBorder,
       ]}
     >
       <View style={styles.textContainer}>
-        <Text variant="p" style={styles.titleText as AnyStyle}>
+        <Text variant="p" style={styles.titleText}>
           {title}
         </Text>
         {description ? (
-          <Text variant="p" style={styles.descriptionText as AnyStyle}>
+          <Text variant="p" style={styles.descriptionText }>
             {description}
           </Text>
         ) : null}
