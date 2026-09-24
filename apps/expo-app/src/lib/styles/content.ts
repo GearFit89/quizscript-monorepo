@@ -1,4 +1,6 @@
-{
+import { theme } from "../theme";
+
+export const stylesContent = {
   "home": {
     "title": {
       "width": 23
@@ -9,10 +11,10 @@
   },
   "page": {
     "read": {
-      "hiegth": 89
+      "height": 89
     }
   },
-  "quiz-setup": {},
+
   "difficultyOption": {
     "container": {
       "padding": 16,
@@ -115,5 +117,58 @@
   "disabled": {
     "opacity": 0.5
   }
+},
+"quizSetup":{
+  "sartButton": { 
+    "width": "80%",
+    "backgroundColor":"#f3e8ff"
+  },
+  "quizLength":{
+    "borderColor": "black"
+  }
+
+
+},
+"text":{
+  "white": {
+    "color":"#ffffff"
+  }
+}, 
+modeOption: {
+  container: {
+    padding: 16,
+    marginVertical: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  defaultBorder: {
+    borderColor: theme.colors.border, 
+  },
+  pressedBorder: {
+    borderColor: theme.colors.primary, 
+  },
+  textContainer: {
+    flex: 1,
+    marginRight: 12,
+  },
+  titleText: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "#FFFFFF",
+  },
+  descriptionText: {
+    fontSize: 14,
+    marginTop: 4,
+    color: "#FFFFFF",
+  },
 }
 }
+
+
+
+
+
+
