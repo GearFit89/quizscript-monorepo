@@ -16,7 +16,7 @@ export default function SetupScreen() {
 
   return (
     <ScrollView >
-      <Text>Setup ID: {id}</Text>
+      <Text>Setup ID: {id}</Text> // FIXME: Remove this later
       
       <Setup />
     </ScrollView>
