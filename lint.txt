@@ -179,4 +179,3 @@
   34:21  error  Expected '===' and instead saw '=='  eqeqeq
 
 ✖ 103 problems (103 errors, 0 warnings)
-

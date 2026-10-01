@@ -3,7 +3,7 @@ import { Redis } from "ioredis";
 
 //note remeber that ws has the userId and username property
 interface Payload {
-    
+
     [key: string]: unknown
 }
 const REDIS_URL = process.env.MY_REDIS_URL; /// for render to give me the url for this libary
