@@ -55,7 +55,17 @@
 - Record only work performed during the current task.
 - Do not include secrets, full chat transcripts, or private reasoning.
 - Do not claim a check passed unless it was actually run.
+- After creating the agent log, stage it with git add agent-log/<logFileName>.
 
+- Commit it with git commit -m "chore(agent): add agent log".
+
+- Push the working branch with git push origin HEAD.
+
+- Replace <logFileName> with the actual filename.
+
+Run each command only if the previous command succeeds.
+
+Report any commit or push failure.
 ## Verification
 - Run checks appropriate to the changed files.
 - For content changes, verify valid JSON and that consumers use
