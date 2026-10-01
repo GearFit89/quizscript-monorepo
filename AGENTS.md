@@ -43,7 +43,7 @@
 
 ## Development log
 - After each task that changes repository files, append a short
-  entry to dev-log/YYYY-MM-DD.md.
+  entry to agent-log/YYYY-MM-DD.md.
 - Use the date in America/Indiana/Indianapolis.
 - Create the file if it does not exist; preserve existing entries.
 - Record:
