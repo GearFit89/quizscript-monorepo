@@ -27,12 +27,12 @@ export default function QuizStartButton () {
   }
   const buttonTitle = isQuizValid ? 'Start Quiz' : 'Quiz is not valid'
   return (
-    <Button
-      onPress={handleQuizStart}
-      className={`${isQuizValid ? theme.opacity.enabled : theme.opacity.disabled}`}
-      style={styles.sartButton}
-      disabled={!isQuizValid}
-
+    <Button 
+    onPress={handleQuizStart} 
+    className={`${isQuizValid ? theme.opacity.enabled : theme.opacity.disabled}`}
+    style={styles.sartButton as AnyStyle}
+    disabled={!isQuizValid}
+    
     >
 
       <Text style={textStyles.white}>{buttonTitle}</Text>
