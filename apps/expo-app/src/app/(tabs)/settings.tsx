@@ -1,3 +1,1 @@
-export default function SettingsPage (){
-    
-}
+export { default } from '@/mock-styles/settings'

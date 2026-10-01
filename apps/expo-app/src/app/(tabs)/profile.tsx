@@ -1,3 +1,1 @@
-export default function ProfilePage (){
-    
-}
+export { default } from '@/mock-styles/profile'

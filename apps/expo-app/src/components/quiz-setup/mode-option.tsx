@@ -1,11 +1,10 @@
-import React from "react";
-import { Pressable,  View } from "react-native";
-import { IconKey } from "@/lib/icons";
-import Icon from "../icon";
-import { Text } from "../ui/text";
-import { useQuizSetup, useStyleTarget} from "@/hooks"
-import type { AnyStyle } from "@/lib/styles";
-
+import React from 'react'
+import { Pressable, View } from 'react-native'
+import { IconKey } from '@/lib/icons'
+import Icon from '../icon'
+import { Text } from '../ui/text'
+import { useQuizSetup, useStyleTarget } from '@/hooks'
+import type { AnyStyle } from '@/lib/styles'
 
 export interface ModeOptionProps<Mode_T> {
   value: Mode_T;
@@ -16,21 +15,21 @@ export interface ModeOptionProps<Mode_T> {
   name?: string;
 }
 
-export default function ModeOption<Mode_T>({
+export default function ModeOption<Mode_T> ({
   value,
   title,
   icon,
   description,
-  color = "#007AFF", // Pass a valid color hex/string or token if overriding
+  color = '#007AFF', // Pass a valid color hex/string or token if overriding
 }: ModeOptionProps<Mode_T>) {
-  const { setMode } = useQuizSetup<Mode_T>();
-  const [isPressed, setIsPressed] = React.useState(false);
-  const { styles } = useStyleTarget("modeOption");
+  const { setMode } = useQuizSetup<Mode_T>()
+  const [isPressed, setIsPressed] = React.useState(false)
+  const { styles } = useStyleTarget('modeOption')
 
   const handlePress = () => {
-    setIsPressed(!isPressed);
-    setMode(value);
-  };
+    setIsPressed(!isPressed)
+    setMode(value)
+  }
 
   return (
     <Pressable
@@ -42,17 +41,19 @@ export default function ModeOption<Mode_T>({
       ]}
     >
       <View style={styles.textContainer}>
-        <Text variant="p" style={styles.titleText}>
+        <Text variant='p' style={styles.titleText}>
           {title}
         </Text>
-        {description ? (
-          <Text variant="p" style={styles.descriptionText }>
-            {description}
-          </Text>
-        ) : null}
+        {description
+          ? (
+            <Text variant='p' style={styles.descriptionText}>
+              {description}
+            </Text>
+            )
+          : null}
       </View>
 
       <Icon color={color} name={icon} />
     </Pressable>
-  );
+  )
 }

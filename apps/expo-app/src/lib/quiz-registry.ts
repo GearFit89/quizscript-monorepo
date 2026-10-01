@@ -1,25 +1,22 @@
-import StandardSetup from "@/components/setups/standard";
-import { QuizKey } from "@bq/shared/types";
+import StandardSetup from '@/components/setups/standard'
+import { QuizKey } from '@bq/shared/types'
 
 interface QuizEntry {
-    Setup: React.ComponentType;
-    // TODO Add QuizActor id Type
-    actorId: string;
+  Setup: React.ComponentType;
+  // TODO Add QuizActor id Type
+  actorId: string;
 
-    Quiz: React.ComponentType;
+  Quiz: React.ComponentType;
 }
-
 
 export const QUIZ_REGISTRY: Record<QuizKey, QuizEntry> = {
 
-    "SOLO-1":
+  'SOLO-1':
     {
-        Setup: StandardSetup,
-        actorId: "normalQuizActor",
-        Quiz: StandardSetup // FIXME: change this to a quiz comp.
-
+      Setup: StandardSetup,
+      actorId: 'normalQuizActor',
+      Quiz: StandardSetup // FIXME: change this to a quiz comp.
 
     }
 
 }
-
