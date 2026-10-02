@@ -1,4 +1,5 @@
 import { setup, sendParent, assign, raise, enqueueActions } from "xstate";
+import { checkAnswer } from "@/logic";
 export interface QuestionMachineContext {
   question: string;
   userInput: string;
@@ -8,9 +9,11 @@ export interface QuestionMachineContext {
   questionBody: string;
   type: string;
 
+  answer: string;
+
   activeUser: string | null;
 }
-export const qeustionMachine = setup({
+export const questionMachine = setup({
   types: {
     context: {} as QuestionMachineContext,
     events: {} as
@@ -24,8 +27,8 @@ export const qeustionMachine = setup({
     displayQuestion: () => {
       // Add your action code here
     },
-    checkInput: enqueueActions(({  enqueue, context }) => {
-      const result = checkAnswer({ threshold: 6 });
+    checkInput: enqueueActions(({  enqueue, context: ctx }) => {
+      const result = checkAnswer(ctx.answer, ctx.userInput );
 
       // Enqueue the internal event back to this machine
       enqueue.raise({
