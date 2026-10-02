@@ -1,1 +1,1 @@
-export { rootMachine } from "./root.machine"
+export { rootMachine } from './root.machine'

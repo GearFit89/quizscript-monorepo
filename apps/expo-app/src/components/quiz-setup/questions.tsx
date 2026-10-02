@@ -1,50 +1,49 @@
-import { useQuizSetup, useSetupContent, useStyleTarget } from "@/hooks";
-import { useFilteredQuestions, useQuestions } from "@/hooks/use-questions";
-import { useEffect, useMemo } from "react";
-import { Modal, View } from "react-native";
-import { Text } from "@/components/ui/text";
-import { TriangleAlertIcon } from "lucide-react-native";
+import { useQuizSetup, useSetupContent, useStyleTarget } from '@/hooks'
+import { useFilteredQuestions, useQuestions } from '@/hooks/use-questions'
+import { useEffect, useMemo } from 'react'
+import { Modal, View } from 'react-native'
+import { Text } from '@/components/ui/text'
+import { TriangleAlertIcon } from 'lucide-react-native'
 
-export function FilteredQuestions() {
-  
+export function FilteredQuestions () {
   const { data, isQuizValid, setIsQuizVaild, minQuizQuestionLength } =
-    useQuizSetup();
+    useQuizSetup()
 
-  if (!data.questionFilters) return null;
+  if (!data.questionFilters) return null
 
-  const { questions,  isLoadingError, error } = useFilteredQuestions({
+  const { questions, isLoadingError, error } = useFilteredQuestions({
     filterCriteria: data.questionFilters,
-  });
+  })
 
-  error && console.error(error);
-  
+  error && console.error(error)
+
   useEffect(() => {
-    setIsQuizVaild(questions.length >= minQuizQuestionLength);
-  }, [questions]);
+    setIsQuizVaild(questions.length >= minQuizQuestionLength)
+  }, [questions])
 
   return (
     <View>
-      {isQuizValid ? <QuizSetupLength length= {questions.length} /> : <QuizSetupError />}
+      {isQuizValid ? <QuizSetupLength length={questions.length} /> : <QuizSetupError />}
     </View>
-  );
+  )
 }
 
-function QuizSetupError() {
+function QuizSetupError () {
   const { errorInvalidQuestionLength } = useSetupContent()
 
   return (
-    <View className="border-border">
-      <TriangleAlertIcon color="red" size={20} />
-      <Text className="text-red-500" numberOfLines={1}>{errorInvalidQuestionLength.title}</Text>
-      <Text className="text-red-500">{errorInvalidQuestionLength.message}</Text>
+    <View className='border-border'>
+      <TriangleAlertIcon color='red' size={20} />
+      <Text className='text-red-500' numberOfLines={1}>{errorInvalidQuestionLength.title}</Text>
+      <Text className='text-red-500'>{errorInvalidQuestionLength.message}</Text>
     </View>
-  );
+  )
 }
 
-function QuizSetupLength ({length}: { length: number}) {
-const { styles } = useStyleTarget("quizSetup")
+function QuizSetupLength ({ length }: { length: number }) {
+  const { styles } = useStyleTarget('quizSetup')
   return (
-    <View style= {styles.quizLength}>
+    <View style={styles.quizLength}>
       <Text>{length}</Text>
     </View>
   )
