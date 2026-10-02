@@ -1,11 +1,11 @@
-import { useCallback, useContext, useMemo, useState } from 'react'
-import type { AnyStyle, StyleClass, StyleContent } from '../lib/styles/types'
-import { StyleContext } from '@/context'
-import { stylesContent } from '@/lib/styles/content'
-import { NavigationRouteContext } from 'expo-router/build/react-navigation'
-import { NativeEventsManager } from 'react-native-reanimated'
+import { useCallback, useContext, useMemo, useState } from "react";
+import type { AnyStyle, StyleClass, StyleContent } from "../lib/styles/types";
+import { StyleContext } from "@/context";
+import { stylesContent } from "@/lib/styles/content";
+import { NavigationRouteContext } from "expo-router/build/react-navigation";
+import { NativeEventsManager } from "react-native-reanimated";
 
-type StyleJson = typeof stylesContent
+type StyleJson = typeof stylesContent;
 export interface StylesState {
   stylesContent: StyleContent;
   /** Replace the whole tree. */
@@ -29,26 +29,26 @@ export interface StylesState {
   addTarget: (target: string) => void;
 }
 
-export function useStylesState (initial: StyleContent): StylesState {
-  const [stylesContent, setStylesContent] = useState<StyleContent>(initial)
+export function useStylesState(initial: StyleContent): StylesState {
+  const [stylesContent, setStylesContent] = useState<StyleContent>(initial);
 
   const updateStylesContent = useCallback(
     (updater: (prev: StyleContent) => StyleContent) => {
-      setStylesContent((prev) => updater(prev))
+      setStylesContent((prev) => updater(prev));
     },
-    []
-  )
+    [],
+  );
 
   const setStyleProperty = useCallback(
     (
       target: string,
       element: string,
       styleKey: string,
-      value: AnyStyle[keyof AnyStyle]
+      value: AnyStyle[keyof AnyStyle],
     ) => {
       setStylesContent((prev) => {
-        const prevClass: StyleClass = prev[target] ?? {}
-        const prevElementStyle: AnyStyle = prevClass[element] ?? {}
+        const prevClass: StyleClass = prev[target] ?? {};
+        const prevElementStyle: AnyStyle = prevClass[element] ?? {};
         return {
           ...prev,
           [target]: {
@@ -58,30 +58,31 @@ export function useStylesState (initial: StyleContent): StylesState {
               [styleKey]: value,
             },
           },
-        }
-      })
+        };
+      });
     },
-    []
-  )
+    [],
+  );
+
 
   const removeStyleProperty = useCallback(
     (target: string, element: string, styleKey: string) => {
       setStylesContent((prev) => {
-        const prevClass = prev[target]
-        if (!prevClass || !prevClass[element]) return prev
-        const nextElementStyle = { ...prevClass[element] } as Record<string, unknown>
-        delete nextElementStyle[styleKey]
+        const prevClass = prev[target];
+        if (!prevClass || !prevClass[element]) return prev;
+        const nextElementStyle = { ...prevClass[element] } as Record<string, unknown>;
+        delete nextElementStyle[styleKey];
         return {
           ...prev,
           [target]: {
             ...prevClass,
-            [element]: nextElementStyle,
+            [element]: nextElementStyle ,
           },
-        }
-      })
+        };
+      });
     },
-    []
-  )
+    [],
+  );
 
   const addElement = useCallback((target: string, element: string) => {
     setStylesContent((prev) => ({
@@ -90,26 +91,29 @@ export function useStylesState (initial: StyleContent): StylesState {
         ...(prev[target] ?? {}),
         [element]: prev[target]?.[element] ?? {},
       },
-    }))
-  }, [])
+    }));
+  }, []);
 
-  const resetStyles = useCallback(() => {
-    setStylesContent(initial)
-    console.debug('Styles Reset')
-  }, [])
+const resetStyles = useCallback(() => {
+  setStylesContent(initial);
+  console.debug("Styles Reset")
 
-  const exportJSON = useCallback(() => {
-    const json = JSON.stringify(stylesContent)
-    console.debug('styles json:', json)
+}, [])
 
-    return json
-  }, [stylesContent])
+const exportJSON = useCallback(() => {
+  const json = JSON.stringify(stylesContent);
+  console.debug("styles json:", json);
+
+  return json;
+
+  
+}, [stylesContent]);
   const addTarget = useCallback((target: string) => {
     setStylesContent((prev) => ({
       ...prev,
       [target]: prev[target] ?? {},
-    }))
-  }, [])
+    }));
+  }, []);
 
   return useMemo(
     () => ({
@@ -123,22 +127,22 @@ export function useStylesState (initial: StyleContent): StylesState {
       addElement,
       addTarget,
     }),
-    [addElement, addTarget, removeStyleProperty, setStyleProperty, stylesContent, updateStylesContent]
-  )
+    [addElement, addTarget, removeStyleProperty, setStyleProperty, stylesContent, updateStylesContent],
+  );
 }
 
 export const useStyles = () => {
   try {
-    const context = useContext(StyleContext)
+    const context = useContext(StyleContext);
     if (!context) {
-      throw new Error('Context is null or undefined')
+      throw new Error("Context is null or undefined");
     }
-    return useMemo(() => context, [context])
+    return useMemo(() => context, [context]);
   } catch (error) {
-    console.error(error)
-    throw new Error('UseStyles must in a <StyleProvider> </StyleProvider> Provider.')
+    console.error(error);
+    throw new Error("UseStyles must in a <StyleProvider> </StyleProvider> Provider.");
   }
-}
+};
 
 interface UseStylesTarget<T extends keyof StyleJson> {
   styles: StyleJson[T];
@@ -148,19 +152,19 @@ interface UseStylesTarget<T extends keyof StyleJson> {
 }
 
 export const useStyleTarget = <T extends keyof StyleJson>(target: T): UseStylesTarget<T> => {
-  const { stylesContent, updateStylesContent, setStyleProperty } = useStyles()
+  const { stylesContent, updateStylesContent, setStyleProperty } = useStyles();
 
   const styles = useMemo(
     () => stylesContent[target] as StyleJson[T],
-    [stylesContent, target]
-  )
+    [stylesContent, target],
+  );
 
   const setProperty = useCallback(
     (element: keyof StyleJson[T], styleKey: string, value: AnyStyle[keyof AnyStyle]) => {
-      setStyleProperty(target, element as string, styleKey, value)
+      setStyleProperty(target, element as string, styleKey, value);
     },
-    [setStyleProperty, target]
-  )
+    [setStyleProperty, target],
+  );
 
   return useMemo(
     () => ({
@@ -168,6 +172,6 @@ export const useStyleTarget = <T extends keyof StyleJson>(target: T): UseStylesT
       updateStyles: updateStylesContent,
       setProperty,
     }),
-    [setProperty, styles, updateStylesContent]
-  )
-}
+    [setProperty, styles, updateStylesContent],
+  );
+};

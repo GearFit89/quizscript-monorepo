@@ -1,21 +1,24 @@
-import { QUIZ_REGISTRY } from "@/lib/quiz-registry";
-import { useLocalSearchParams } from "expo-router";
-import { View, Text, ScrollView } from "react-native";
+import { QUIZ_REGISTRY } from '@/lib/quiz-registry';
+import { useLocalSearchParams } from 'expo-router';
+import { View, Text, ScrollView } from 'react-native';
 
 export default function SetupScreen() {
+  
   const { id } = useLocalSearchParams<{ id: string }>();
   const quiz = QUIZ_REGISTRY[id];
 
-  if (!quiz) {
-    return <Text>404, no setup here</Text>;
-    // TODO thro error to error boundary
+  if(!quiz){
+    return <Text>404, no setup here</Text>
+    //TODO thro error to error boundary
   }
 
-  const SetupComponent = quiz.Setup;
+  const { Setup } = quiz;
 
   return (
-    <ScrollView>
-      <SetupComponent />
+    <ScrollView >
+      <Text>Setup ID: {id}</Text> // FIXME: Remove this later
+      
+      <Setup />
     </ScrollView>
   );
 }

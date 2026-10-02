@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { Pressable, View, StyleSheet } from 'react-native'
-import { Checkbox } from '@/components/ui/checkbox'
-import { RadioGroupItem } from '@/components/ui/radio-group'
-import { Label } from '@/components/ui/label'
-import { useStyleTarget } from '@/hooks'
-import { AnyStyle } from '@/lib/styles'
+import * as React from "react";
+import { Pressable, View, StyleSheet } from "react-native";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useStyleTarget } from "@/hooks";
+import { AnyStyle } from "@/lib/styles";
 
-export type FilterOptionType = 'single' | 'multi'
-export type FilterOptionVariant = 'checkbox' | 'circle' | 'block'
+export type FilterOptionType = "single" | "multi";
+export type FilterOptionVariant = "checkbox" | "circle" | "block";
 
 export interface QuestionFilterOptionProps {
   /**
@@ -43,13 +43,13 @@ export interface QuestionFilterOptionProps {
 }
 
 const COLORS = {
-  border: '#cbd5e1', // slate-300, matches .chapter-circle / .book-accordion-item border
-  borderHover: '#94a3b8', // slate-400
-  text: '#334155', // slate-700
-  selectedBg: '#2563eb', // blue-600
-  selectedBorder: '#2563eb',
-  selectedText: '#ffffff',
-}
+  border: "#cbd5e1", // slate-300, matches .chapter-circle / .book-accordion-item border
+  borderHover: "#94a3b8", // slate-400
+  text: "#334155", // slate-700
+  selectedBg: "#2563eb", // blue-600
+  selectedBorder: "#2563eb",
+  selectedText: "#ffffff",
+};
 
 const shadowStyle = StyleSheet.create({
   selected: {
@@ -59,7 +59,7 @@ const shadowStyle = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3, // Android
   },
-})
+});
 
 /**
  * Atomic filter option, built on the real RN Reusables primitives
@@ -104,9 +104,9 @@ const shadowStyle = StyleSheet.create({
  *     onChange={(name, value, checked) => toggleMonth(value, checked)}
  *   />
  */
-export function QuestionFilterOption ({
+export function QuestionFilterOption({
   type,
-  variant = 'checkbox',
+  variant = "checkbox",
   name,
   value,
   label,
@@ -114,54 +114,55 @@ export function QuestionFilterOption ({
   onChange,
   disabled,
 }: QuestionFilterOptionProps) {
-  const labelId = `label-for-${name}-${value}`
+  const labelId = `label-for-${name}-${value}`;
 
-  const { styles } = useStyleTarget('questionFilter')
+  const { styles } = useStyleTarget("questionFilter")
 
-  if (variant === 'circle' || variant === 'block') {
+  
+  if (variant === "circle" || variant === "block") {
     const handlePress = () => {
-      if (disabled) return
-      onChange(name, value, type === 'single' ? true : !checked)
-    }
+      if (disabled) return;
+      onChange(name, value, type === "single" ? true : !checked);
+    };
 
-    const isCircle = variant === 'circle'
+    const isCircle = variant === "circle";
 
     return (
-      <Pressable
-        onPress={handlePress}
-        disabled={disabled}
-        accessibilityRole={type === 'single' ? 'radio' : 'checkbox'}
-        accessibilityState={{ checked, disabled }}
-        nativeID={labelId}
-        style={[
-          isCircle ? styles.circleBase : styles.blockBase,
-          {
-            backgroundColor: checked ? COLORS.selectedBg : '#ffffff',
-            borderColor: checked ? COLORS.selectedBorder : COLORS.border,
-          },
-          checked && shadowStyle.selected,
-          disabled && styles.disabled,
-        ]}
-      >
-        <View pointerEvents='none'>
-          <Label
-            className='native:text-sm font-semibold text-center'
-            style={{ color: checked ? COLORS.selectedText : COLORS.text }}
-          >
-            {label}
-          </Label>
-        </View>
-      </Pressable>
-    )
+     <Pressable
+  onPress={handlePress}
+  disabled={disabled}
+  accessibilityRole={type === "single" ? "radio" : "checkbox"}
+  accessibilityState={{ checked, disabled }}
+  nativeID={labelId}
+  style={[
+    isCircle ? styles.circleBase  : styles.blockBase ,
+    {
+      backgroundColor: checked ? COLORS.selectedBg : "#ffffff",
+      borderColor: checked ? COLORS.selectedBorder : COLORS.border,
+    },
+    checked && shadowStyle.selected,
+    disabled && styles.disabled,
+  ]}
+>
+  <View pointerEvents="none">
+    <Label
+      className="native:text-sm font-semibold text-center"
+      style={{ color: checked ? COLORS.selectedText : COLORS.text }}
+    >
+      {label}
+    </Label>
+  </View>
+</Pressable>
+    );
   }
 
   // --- 'checkbox' variant (original behavior, unchanged) ---
-  if (type === 'multi') {
+  if (type === "multi") {
     const handlePress = () => {
-      if (!disabled) onChange(name, value, !checked)
-    }
+      if (!disabled) onChange(name, value, !checked);
+    };
     return (
-      <View className='flex-row items-center gap-3 py-2'>
+      <View className="flex-row items-center gap-3 py-2">
         <Checkbox
           checked={checked}
           onCheckedChange={handlePress}
@@ -170,17 +171,17 @@ export function QuestionFilterOption ({
         <Label
           nativeID={labelId}
           onPress={handlePress}
-          className='native:text-base flex-1'
+          className="native:text-base flex-1"
         >
           {label}
         </Label>
       </View>
-    )
+    );
   }
 
   // type === 'single' — relies on an ancestor RadioGroup for state/exclusivity
   return (
-    <View className='flex-row items-center gap-3 py-2'>
+    <View className="flex-row items-center gap-3 py-2">
       <RadioGroupItem
         aria-labelledby={labelId}
         value={value}
@@ -188,14 +189,15 @@ export function QuestionFilterOption ({
       />
       <Label
         nativeID={labelId}
-        className='native:text-base flex-1'
+        className="native:text-base flex-1"
         onPress={() => {
-          if (disabled) return
-          onChange(name, value, true)
+          if (disabled) return;
+          onChange(name, value, true);
         }}
       >
         {label}
       </Label>
     </View>
-  )
+  );
 }
+

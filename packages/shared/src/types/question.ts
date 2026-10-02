@@ -1,26 +1,31 @@
-import { BIBLE_BOOKS } from '../utils'
+import { BIBLE_BOOKS } from "../utils";
+
 
 export interface RefObject {
   book: string;
   chapter: string;
   verse: string;
-  verseRange?: string;
+  verseRange?: string
 }
-export type BibleKey = keyof typeof BIBLE_BOOKS
+ export type BibleKey = keyof typeof BIBLE_BOOKS
+
 
 export interface AppFilterCriteria {
-  month: string[];
+  month: string [];
   flight: string[];
   bookRange: BookRange;
-  difficulty?: string[];
-  type: string[];
+  difficulty?: string[]
+  type: string []
+
+
 }
+
 
 export type FilterCriteria<T = BaseQuestion> = {
   [K in keyof T]?: Array<NonNullable<T[K]>> | null;
 } & {
   bookRange: BookRange;
-}
+};
 export type BookRange = Partial<Record<BibleKey, string[]>>
 
 export interface BaseQuestion {
@@ -31,50 +36,57 @@ export interface BaseQuestion {
   type: string;
 
   verseRange?: string;
+
 }
-export interface AppQuestion extends BaseQuestion {
-  flight?: string;
+export interface AppQuestion extends BaseQuestion{
+  flight?:string;
   month?: string;
 
   question?: string;
   answer?: string;
 
-  difficulty?: number;
+   difficulty?: number
 }
 
 export interface VerseQuestion extends AppQuestion {
   ref?: string; // Bible refence (book chapter:verse)
-  type: 'ftv' | 'quote';
+  type: "ftv"|"quote"
   numVerse?: number;
+ 
+
+
 }
-export interface FTVQuestion extends VerseQuestion {
-  type: 'ftv';
+export interface FTVQuestion extends VerseQuestion{
+  type: "ftv",
   stopAtWord: number; // The word at which the question stops
+
 }
 
 export interface QuoteQuestion extends VerseQuestion {
-  type: 'quote';
+  type: "quote";
   includeRef?: boolean;
   strictLevel?: number;
+
 }
 export interface NormalQuestion extends AppQuestion {
   answer: string;
   question: string;
-  type: 'question';
+  type: "question";
+
+
 }
 
 export type Question = NormalQuestion | FTVQuestion | QuoteQuestion
 
-export type QuizQuestionState = 'none' | 'correct' | 'incorrect' | 'skipped' | null
-export interface QuizQuestion {
+export type QuizQuestionState = "none"|"correct"|"incorrect"|"skipped"
+export interface QuizQuestion extends AppQuestion {
   state: QuizQuestionState;
-  answerType?: string; // TODO: add actual types
+  answerType?: string // TODO: add actual types
 
-  questionType: 'text';
+  questionType: "text"
+  timestamp:number;
 
-  head: string;
-  body: string;
-  answer: string;
-  user: string | null; // The user who answered
-  typedAnswer?: string | null;
+  user: string // The user who answered
+  typedAnswer?: string;
+
 }
